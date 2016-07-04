@@ -92,7 +92,7 @@ public class CrearDiccionario extends javax.swing.JFrame {
         textoCompresion.setEditable(false);
         textoCompresion.setText("jTextField4");
 
-        jLabel4.setText("Compresión estimada");
+        jLabel4.setText("Longitud Media");
 
         jCheckBox1.setText("Usar compresión en dos grupos");
 
@@ -228,16 +228,13 @@ public class CrearDiccionario extends javax.swing.JFrame {
     }//GEN-LAST:event_textoAnalizarMouseClicked
 
     private void botonAnalizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAnalizarMouseClicked
-        /*float entro = frec.lectura(textoAnalizar.getText());
-        textoCotaInferior.setText(Float.toString(entro));
-        textoCotaSuperior.setText(Float.toString(entro+0.5f));
-        textoCompresion.setText(Integer.toString((int)(100-(((entro+0.5f)*100)/7))));*/
+        
     }//GEN-LAST:event_botonAnalizarMouseClicked
 
     private void botonAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnalizarActionPerformed
 float entro = frec.lectura(textoAnalizar.getText());
         textoCotaInferior.setText(Float.toString(entro));
-        textoCotaSuperior.setText(Float.toString(entro+0.5f));
+        textoCotaSuperior.setText(Float.toString(entro+(float)frec.getfrecmax()+0.082f));
         textoCompresion.setText(Integer.toString((int)(100-(((entro+0.5f)*100)/7))));
     }//GEN-LAST:event_botonAnalizarActionPerformed
 

@@ -16,6 +16,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,15 @@ import trabajarBits.BitOutputStream;
  * @author carlos
  */
 public class CompreDescom {
+    
+    private float longitud;
+    private ArrayList<Integer> longitudes;
+
+    public float getLongitud() {
+        return longitud;
+    }
+    
+    
 
     public static void escribeDicci(ArbolHuffman arbol, String nombreDicc) throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nombreDicc))) {
@@ -50,8 +60,7 @@ public class CompreDescom {
     }
 
     public static void decodificar(String ruta, ArbolHuffman dic) throws IOException {
-        try (BitInputStream textoCod = new BitInputStream(ruta)) {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + "_deco.txt"));
+        try (BitInputStream textoCod = new BitInputStream(ruta); BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + "_deco.txt"))) {
 
             ArbolHuffman actual = dic;
             int bit = textoCod.readBits(1);
@@ -65,10 +74,15 @@ public class CompreDescom {
                 bit = textoCod.readBits(1);
             }
             textoCod.close();
-            bw.close();
         }
     }
 
+    /**
+     * Utilidad para moverse por el árbol
+     * @param nodo nodo actual
+     * @param bit bit que indica izquierda o derecha
+     * @return nodo siguiente
+     */
     private static ArbolHuffman decodifica(NodoHuffman nodo, int bit) {
         if (bit == 0) {
             return nodo.izquierda;
@@ -113,7 +127,7 @@ public class CompreDescom {
      */
     public static void codificar(ArbolHuffman dicc, String texto, String nuevo) throws FileNotFoundException, UnsupportedEncodingException, IOException {
         HashMap<Integer, String> d = creaDicc(dicc);
-        String codigoBinario;
+        char[] codigoBinario;
 
         FileInputStream fis = new FileInputStream(texto);
         InputStreamReader is = new InputStreamReader(fis, "ISO-8859-1");
@@ -122,9 +136,10 @@ public class CompreDescom {
             int caracter;
             caracter = bf.read();
             while (caracter != -1) {
-                codigoBinario = d.get(caracter);
-                for (int i = 0; i < codigoBinario.length(); i++) {
-                    bos.writeBits(1, Integer.valueOf(codigoBinario.substring(i, i + 1)));
+                codigoBinario = d.get(caracter).toCharArray();
+                
+                for (int i = 0; i < codigoBinario.length; i++) {
+                    bos.writeBits(1, Integer.valueOf(codigoBinario[i]));
                 }
                 caracter = bf.read();
             }
@@ -135,7 +150,10 @@ public class CompreDescom {
 
     private static HashMap<Integer, String> creaDicc(ArbolHuffman dicc) {
         HashMap<Integer, String> d = new HashMap<>();
+        
         construyeMap(dicc, new StringBuffer(), d);
+        //TODO
+        System.out.println(d.keySet());
         return d;
     }
 

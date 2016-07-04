@@ -202,7 +202,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Compresi&#xf3;n estimada"/>
+        <Property name="text" type="java.lang.String" value="Longitud Media"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox1">
