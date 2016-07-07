@@ -17,7 +17,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import trabajarBits.BitInputStream;
@@ -30,7 +33,6 @@ import trabajarBits.BitOutputStream;
 public class CompreDescom {
     
     private float longitud;
-    private ArrayList<Integer> longitudes;
 
     public float getLongitud() {
         return longitud;
@@ -91,39 +93,12 @@ public class CompreDescom {
         }
     }
 
-    private static void decodificarInte(ArbolHuffman raiz, ArbolHuffman actual, BitInputStream ent, StringBuffer leo) throws IOException {
-        int bit = ent.readBits(1);
-
-        if (actual instanceof HojaHuffman) {
-            HojaHuffman n = (HojaHuffman) actual;
-            leo.append((char) n.letras.n);
-            actual = raiz;
-        }
-
-        if (bit != -1) {
-            if (actual instanceof NodoHuffman) {
-                NodoHuffman nh = (NodoHuffman) actual;
-                //ind++;
-                switch (bit) {
-                    case 0:
-                        decodificarInte(raiz, nh.izquierda, ent, leo);
-                        break;
-                    case 1:
-                        decodificarInte(raiz, nh.derecha, ent, leo);
-                        break;
-                }
-            }
-        }
-
-    }
-
     /**
      * Funciona para decoficar una cadena de 0,1s que terminará en -1
      *
      * @param dicc el diccionario huffman
-     * @param numeros
-     * @param ind
-     * @return un string que contiene el texto descodificado
+     * @param texto
+     * @param nuevo
      */
     public static void codificar(ArbolHuffman dicc, String texto, String nuevo) throws FileNotFoundException, UnsupportedEncodingException, IOException {
         HashMap<Integer, String> d = creaDicc(dicc);
@@ -153,7 +128,13 @@ public class CompreDescom {
         
         construyeMap(dicc, new StringBuffer(), d);
         //TODO
-        System.out.println(d.keySet());
+        Collection<String> add = d.values();
+        double n=0;
+        for (String s : add) {
+            n+=s.length();
+        }
+        n/=add.size();
+        System.out.println("Tama = " + n);
         return d;
     }
 

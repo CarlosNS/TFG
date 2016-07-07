@@ -100,6 +100,9 @@ public class tablaFrecuencias {
         return dev;
     }
 
+    /*
+    Ordena de mayor a menor
+    */
     void ordenar() {
         Collections.sort(lista, new Comparator<Letra>() {
             @Override

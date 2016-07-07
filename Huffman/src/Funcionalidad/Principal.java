@@ -24,9 +24,18 @@ public class Principal {
 
     static JTextArea consola;
     private ArbolHuffman dic;
+    private double frecmax;
 
     public ArbolHuffman getDic() {
         return dic;
+    }
+    
+    /**
+     * 
+     * @return La frecuencia max de repeticion de un caracter
+     */
+    public double getfrecmax(){
+        return frecmax;
     }
     
     
@@ -50,7 +59,10 @@ public class Principal {
                 car = bf.read();
             }
             tf.ordenar();
+            
             tf.procesar();
+            frecmax = tf.getLista().get(0).fr;
+            
             dic= Huffman.CodigoHuffman.Huffman(tf.getLista());
             consola.setText(tf.toString());
             return entropia(tf);
