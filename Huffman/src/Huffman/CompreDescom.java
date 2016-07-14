@@ -16,11 +16,8 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import trabajarBits.BitInputStream;
@@ -99,6 +96,8 @@ public class CompreDescom {
      * @param dicc el diccionario huffman
      * @param texto
      * @param nuevo
+     * @throws java.io.FileNotFoundException
+     * @throws java.io.UnsupportedEncodingException
      */
     public static void codificar(ArbolHuffman dicc, String texto, String nuevo) throws FileNotFoundException, UnsupportedEncodingException, IOException {
         HashMap<Integer, String> d = creaDicc(dicc);

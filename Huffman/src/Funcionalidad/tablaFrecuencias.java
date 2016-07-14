@@ -1,19 +1,17 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Clase para el manejo de la clase tablaFrecuencias, consistente en un par
+ * 
  */
 package Funcionalidad;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author Enrique
+ * @author Carlos Naranjo Sánchez
  */
 public class tablaFrecuencias {
 
@@ -35,24 +33,7 @@ public class tablaFrecuencias {
 
     //10 es salto de linea, 13, retorno de carro
     public boolean insertar(char letra) {
-        //System.out.println("Leo " + letra +" :"+ (int)letra+"\n");
-        //System.out.println("_______________");
-        /*
-        String dentro;
-        switch ((int) letra) {
-            case 10:
-                dentro = "Salto de linea";
-                break;
-            case 13:
-                dentro = "Retorno de carro";
-                break;
-            case 32:
-                dentro = "Espacio";
-                break;
-            default:
-                dentro = String.valueOf(letra);
-
-        }*/
+        
         if (!procesada) {
             int sitio = lista.indexOf(new Letra(letra, 0));
             if (sitio != -1) {
@@ -69,19 +50,16 @@ public class tablaFrecuencias {
     }
 
     public void procesar() {
-        if (!procesada) {
-            for (Letra lista1 : lista) {
+        if (!procesada) {lista.stream().forEach((lista1) -> {
                 lista1.fr /= cuenta;
-            }
+            });
             procesada = true;
         }
     }
 
     public Letra valor(int i) {
-        if (i <= fin) {
-            return lista.get(i);
-        }
-        System.err.println("");
+        if (i <= fin) {return lista.get(i);}
+        System.err.println("Error en tablaFrecuencias");
         return null;
     }
 
@@ -94,9 +72,7 @@ public class tablaFrecuencias {
     @Override
     public String toString() {
         String dev = "";
-        for (Letra lista1 : lista) {
-            dev += lista1.toString() + "\n";
-        }
+        dev = lista.stream().map((lista1) -> lista1.toString() + "\n").reduce(dev, String::concat);
         return dev;
     }
 
@@ -104,13 +80,7 @@ public class tablaFrecuencias {
     Ordena de mayor a menor
     */
     void ordenar() {
-        Collections.sort(lista, new Comparator<Letra>() {
-            @Override
-            public int compare(Letra arg0, Letra arg1) {
-                return Double.compare(arg1.fr, arg0.fr);
-            }
-        }
-        );
+        Collections.sort(lista, (Letra arg0, Letra arg1) -> Double.compare(arg1.fr, arg0.fr));
     }
 
     public LinkedList<Letra> getLista() {

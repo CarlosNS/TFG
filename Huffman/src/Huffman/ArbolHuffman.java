@@ -31,7 +31,6 @@ public abstract class ArbolHuffman implements Comparable<ArbolHuffman>, Serializ
     @Override
     public int compareTo(ArbolHuffman tree) {
         return Double.compare(frequency, tree.frequency);
-        //return frequency - tree.frequency;
     }
 
     public String imprimirCodigos() {

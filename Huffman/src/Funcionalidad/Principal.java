@@ -6,7 +6,6 @@
 package Funcionalidad;
 
 import Huffman.ArbolHuffman;
-import Huffman.CodigoHuffman;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,7 +17,7 @@ import javax.swing.JTextArea;
 
 /**
  *
- * @author Enrique
+ * @author Carlos Naranjo Sánchez
  */
 public class Principal {
 

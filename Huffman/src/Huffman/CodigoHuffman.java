@@ -64,22 +64,6 @@ public class CodigoHuffman {
     
     public static ArbolHuffman Huffman(LinkedList<Letra> args) {
 
-        //ArbolHuffman tree = construyeArbol(args);
-
-        // print out results
-        //System.out.println("SYMBOL\tWEIGHT\tHUFFMAN CODE");
-        System.out.println("antes de escribir\n");
-        //imprimirCodigos(tree, new StringBuffer());
-        /*
-        try {
-            CompreDescom.escribeDicci(tree);
-        } catch (IOException ex) {
-            Logger.getLogger(CodigoHuffman.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("despues\n");*/
-        //imprimirCodigos(CompreDescom.leeDicc("dicc.dhf"), new StringBuffer());
-        //imprimirCodigos(tree, new StringBuffer());
-        //prueba(tree);
         return construyeArbol(args);
     }
 
