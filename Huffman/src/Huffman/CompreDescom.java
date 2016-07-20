@@ -45,6 +45,12 @@ public class CompreDescom {
 
     }
 
+    /**
+     * Dada una ruta absoluta a un diccionario Huffman, lo lee y lo prepara para
+     * el programa
+     * @param ruta La ruta al diccionario Huffman
+     * @return Devuelve una estructura de árbol Huffman
+     */
     public static ArbolHuffman leeDicc(String ruta) {
         try {
             Object arbol;
@@ -58,6 +64,13 @@ public class CompreDescom {
         return null;
     }
 
+    /**
+     * Función para descomprimir un archivo codificado con un diccionario
+     * Huffman
+     * @param ruta la ruta al archivo comprimido
+     * @param dic el diccionario con el se comprimió el texto
+     * @throws IOException 
+     */
     public static void decodificar(String ruta, ArbolHuffman dic) throws IOException {
         try (BitInputStream textoCod = new BitInputStream(ruta); BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + "_deco.txt"))) {
 
@@ -66,7 +79,6 @@ public class CompreDescom {
             while (bit != -1) {
                 actual = decodifica((NodoHuffman) actual, bit);
                 if (actual instanceof HojaHuffman) {
-                    //System.out.println((char)((HojaHuffman) actual).letras.n);
                     bw.write((char)((HojaHuffman) actual).letras.n);
                     actual = dic;
                 }
@@ -122,6 +134,11 @@ public class CompreDescom {
         }
     }
 
+    /**
+     * A partir de un árbol Huffman, crea un diccionario clave valor
+     * @param dicc el árbol Huffman
+     * @return el diccionario clave valor
+     */
     private static HashMap<Integer, String> creaDicc(ArbolHuffman dicc) {
         HashMap<Integer, String> d = new HashMap<>();
         
