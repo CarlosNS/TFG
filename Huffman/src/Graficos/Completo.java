@@ -46,7 +46,7 @@ public class Completo extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         botonAnalizar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        textoCompresion = new javax.swing.JTextField();
+        textoLongitudMedia = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         textoAnalizar = new javax.swing.JTextPane();
         jLabel4 = new javax.swing.JLabel();
@@ -100,8 +100,8 @@ public class Completo extends javax.swing.JFrame {
 
         jLabel1.setText("Texto a analizar");
 
-        textoCompresion.setEditable(false);
-        textoCompresion.setText("0");
+        textoLongitudMedia.setEditable(false);
+        textoLongitudMedia.setText("0");
 
         textoAnalizar.setEditable(false);
         textoAnalizar.setAutoscrolls(false);
@@ -157,7 +157,7 @@ public class Completo extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botonAnalizar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -177,17 +177,16 @@ public class Completo extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textoCompresion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(textoLongitudMedia))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                        .addComponent(textoDiccionario, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botonDiccionario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(etiquetaEstadoDicc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addComponent(textoDiccionario, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonDiccionario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(etiquetaEstadoDicc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,7 +221,7 @@ public class Completo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(textoCompresion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textoLongitudMedia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13))
         );
 
@@ -430,7 +429,8 @@ public class Completo extends javax.swing.JFrame {
         float entro = frec.lectura(textoAnalizar.getText());
         textoCotaInferior.setText(Float.toString(entro));
         textoCotaSuperior.setText(Float.toString(entro + (float) frec.getfrecmax() + 0.082f));
-        textoCompresion.setText(Integer.toString((int) (100 - (((entro + 0.5f) * 100) / 7))));
+        textoLongitudMedia.setText(Integer.toString((int) (100 - (((entro + 0.5f) * 100) / 7))));
+        textoLongitudMedia.setText(CompreDescom.DameLongitud(frec.getDic())+"");
     }//GEN-LAST:event_botonAnalizarActionPerformed
 
     private void textoAnalizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textoAnalizarMouseClicked
@@ -438,12 +438,13 @@ public class Completo extends javax.swing.JFrame {
     }//GEN-LAST:event_textoAnalizarMouseClicked
 
     private void botonDiccionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDiccionarioActionPerformed
-        etiquetaEstadoDicc.setText("Diccionario creado");
         ultimoDic = textoDiccionario.getText() + ".dhf";
         try {
             CompreDescom.escribeDicci(frec.getDic(), ultimoDic);
+            etiquetaEstadoDicc.setText("Diccionario creado");
         } catch (IOException ex) {
             Logger.getLogger(Completo.class.getName()).log(Level.SEVERE, null, ex);
+            etiquetaEstadoDicc.setText("Error al crear el diccionario");
         }
     }//GEN-LAST:event_botonDiccionarioActionPerformed
 
@@ -570,13 +571,13 @@ public class Completo extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextPane textoAnalizar;
     private javax.swing.JTextField textoCompReal;
-    private javax.swing.JTextField textoCompresion;
     private javax.swing.JTextArea textoConsola;
     private javax.swing.JTextField textoCotaInferior;
     private javax.swing.JTextField textoCotaSuperior;
     private javax.swing.JTextField textoDicAcom;
     private javax.swing.JTextField textoDiccionDescomp;
     private javax.swing.JTextField textoDiccionario;
+    private javax.swing.JTextField textoLongitudMedia;
     private javax.swing.JTextField textoTextAcomp;
     private javax.swing.JTextField textoTextoDescom;
     // End of variables declaration//GEN-END:variables

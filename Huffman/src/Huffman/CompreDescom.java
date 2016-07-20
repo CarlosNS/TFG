@@ -153,6 +153,20 @@ public class CompreDescom {
         System.out.println("Tama = " + n);
         return d;
     }
+    
+    public static float DameLongitud(ArbolHuffman dicc) {
+        HashMap<Integer, String> d = new HashMap<>();
+        
+        construyeMap(dicc, new StringBuffer(), d);
+        //TODO
+        Collection<String> add = d.values();
+        float n=0;
+        for (String s : add) {
+            n+=s.length();
+        }
+        n/=add.size();
+        return n;
+    }
 
     private static void construyeMap(ArbolHuffman arbol, StringBuffer prefix, HashMap<Integer, String> d) {
         assert arbol != null;
