@@ -1,11 +1,7 @@
 package Huffman;
 
 import Funcionalidad.Letra;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.*;
-
-
 
 public class CodigoHuffman {
 
@@ -32,36 +28,6 @@ public class CodigoHuffman {
         return arboles.poll();
     }
 
-
-    /**
-     *
-     * @param arbol
-     * @param prefix
-     * @param dicci String vacio
-     */
-    private static void crearDicc(ArbolHuffman arbol, StringBuffer prefix, FileWriter fic) throws IOException {
-        assert arbol != null;
-        if (arbol instanceof HojaHuffman) {
-            HojaHuffman leaf = (HojaHuffman) arbol;
-
-            fic.write(leaf.letras.n + "\t" + prefix + "\n");
-
-        } else if (arbol instanceof NodoHuffman) {
-            NodoHuffman nodo = (NodoHuffman) arbol;
-
-            // rama izquierda
-            prefix.append('0');
-            crearDicc(nodo.izquierda, prefix, fic);
-            prefix.deleteCharAt(prefix.length() - 1);
-
-            // rama derecha
-            prefix.append('1');
-            crearDicc(nodo.derecha, prefix, fic);
-            prefix.deleteCharAt(prefix.length() - 1);
-        }
-    }
-
-    
     public static ArbolHuffman Huffman(LinkedList<Letra> args) {
 
         return construyeArbol(args);

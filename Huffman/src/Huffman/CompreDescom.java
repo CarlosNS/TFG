@@ -25,17 +25,9 @@ import trabajarBits.BitOutputStream;
 
 /**
  *
- * @author carlos
+ * @author Carlos Naranjo Sánchez
  */
 public class CompreDescom {
-    
-    private float longitud;
-
-    public float getLongitud() {
-        return longitud;
-    }
-    
-    
 
     public static void escribeDicci(ArbolHuffman arbol, String nombreDicc) throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nombreDicc))) {
@@ -124,6 +116,7 @@ public class CompreDescom {
             while (caracter != -1) {
                 codigoBinario = d.get(caracter).toCharArray();
                 
+                
                 for (int i = 0; i < codigoBinario.length; i++) {
                     bos.writeBits(1, Integer.valueOf(codigoBinario[i]));
                 }
@@ -141,24 +134,18 @@ public class CompreDescom {
      */
     private static HashMap<Integer, String> creaDicc(ArbolHuffman dicc) {
         HashMap<Integer, String> d = new HashMap<>();
-        
         construyeMap(dicc, new StringBuffer(), d);
-        //TODO
-        Collection<String> add = d.values();
-        double n=0;
-        for (String s : add) {
-            n+=s.length();
-        }
-        n/=add.size();
-        System.out.println("Tama = " + n);
         return d;
     }
     
+    /**
+     * 
+     * @param dicc
+     * @return 
+     */
     public static float DameLongitud(ArbolHuffman dicc) {
         HashMap<Integer, String> d = new HashMap<>();
-        
         construyeMap(dicc, new StringBuffer(), d);
-        //TODO
         Collection<String> add = d.values();
         float n=0;
         for (String s : add) {
