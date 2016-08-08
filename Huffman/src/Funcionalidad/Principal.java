@@ -47,7 +47,7 @@ public class Principal {
      *
      * @param tf El objeto contenedor de las letras
      */
-    private void constructor(tablaFrecuencias tf) {
+    private void constructor(TablaFrecuencias tf) {
         char relleno[] = new char[190];
 
         //Ascii normales
@@ -68,16 +68,16 @@ public class Principal {
         }
     }
 
-    public float lectura(String texto, boolean principio) {
+    public float lectura(String ruta, boolean principio) {
         try {
 
-            tablaFrecuencias tf = new tablaFrecuencias();
+            TablaFrecuencias tf = new TablaFrecuencias();
 
             if (principio) {
                 constructor(tf);
             }
 
-            FileInputStream fis = new FileInputStream(texto);
+            FileInputStream fis = new FileInputStream(ruta);
             InputStreamReader is = new InputStreamReader(fis, "ISO-8859-1");
             BufferedReader bf = new BufferedReader(is);
 
@@ -101,7 +101,7 @@ public class Principal {
         return 0;
     }
 
-    private static float entropia(tablaFrecuencias tf) {
+    private static float entropia(TablaFrecuencias tf) {
         float cuenta = 0;
         for (int i = 0; i < tf.getFin(); i++) {
             cuenta += tf.valor(i).fr * (log(tf.valor(i).fr) / log(2));
