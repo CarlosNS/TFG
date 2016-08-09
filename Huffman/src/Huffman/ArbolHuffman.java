@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Huffman;
 
 import Funcionalidad.Letra;
@@ -11,15 +6,15 @@ import java.util.Random;
 
 /**
  *
- * @author unake
+ * @author Carlos Naranjo Sánchez
  */
 public abstract class ArbolHuffman implements Comparable<ArbolHuffman>, Serializable {
 
     public final int id;
-    public final double frequency; // la frecuencia del arbol
+    public final double frecuencia; // la frecuencia del arbol
 
     public ArbolHuffman(double freq) {
-        frequency = freq;
+        frecuencia = freq;
         id = new Random(System.currentTimeMillis()).nextInt();
     }
 
@@ -27,12 +22,18 @@ public abstract class ArbolHuffman implements Comparable<ArbolHuffman>, Serializ
         return id;
     }
 
-    // compares on the frequency
+    // compares on the frecuencia
     @Override
     public int compareTo(ArbolHuffman tree) {
-        return Double.compare(frequency, tree.frequency);
+        return Double.compare(frecuencia, tree.frecuencia);
     }
 
+    /**
+     * Método que permite previsualizar los códigos que tendrán los nodos del
+     * árbol huffman
+     * @return un string donde están contenidos todos los carácteres con sus
+     * códigos
+     */
     public String imprimirCodigos() {
         StringBuffer dev = new StringBuffer();
         imprimirCodigos(this, new StringBuffer(), dev);
@@ -82,7 +83,7 @@ class NodoHuffman extends ArbolHuffman implements Serializable {
     public final ArbolHuffman izquierda, derecha; // subarboles
 
     public NodoHuffman(ArbolHuffman l, ArbolHuffman r) {
-        super(l.frequency + r.frequency);
+        super(l.frecuencia + r.frecuencia);
         izquierda = l;
         derecha = r;
     }

@@ -16,7 +16,7 @@ import javax.swing.JFileChooser;
  *
  * @author unake
  */
-public class Completo extends javax.swing.JFrame {
+public class Interfaz extends javax.swing.JFrame {
 
     Funcionalidad.Principal frec;
     String ultimoDic;
@@ -24,7 +24,7 @@ public class Completo extends javax.swing.JFrame {
     /**
      * Creates new form Completo
      */
-    public Completo() {
+    public Interfaz() {
         initComponents();
         this.setTitle("CNS Huffman");
         frec = new Funcionalidad.Principal(textoConsola);
@@ -466,7 +466,7 @@ public class Completo extends javax.swing.JFrame {
             CompreDescom.escribeDicci(frec.getDic(), ultimoDic);
             etiquetaEstadoDicc.setText("Diccionario creado");
         } catch (IOException ex) {
-            Logger.getLogger(Completo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
             etiquetaEstadoDicc.setText("Error al crear el diccionario");
         }
     }//GEN-LAST:event_botonDiccionarioActionPerformed
@@ -475,9 +475,9 @@ public class Completo extends javax.swing.JFrame {
         try {
             CompreDescom.codificar(CompreDescom.leeDicc(textoDicAcom.getText()), textoTextAcomp.getText(), (textoTextAcomp.getText() + "_comp.bin"));
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Completo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(Completo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -486,7 +486,7 @@ public class Completo extends javax.swing.JFrame {
         try {
             CompreDescom.decodificar(textoTextoDescom.getText(), CompreDescom.leeDicc(textoDiccionDescomp.getText()));
         } catch (IOException ex) {
-            Logger.getLogger(Completo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botonDescompresionActionPerformed
 
@@ -550,20 +550,21 @@ public class Completo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Completo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Completo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Completo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Completo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Completo().setVisible(true);
+                new Interfaz().setVisible(true);
             }
         });
     }

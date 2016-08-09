@@ -1,6 +1,6 @@
 /*
- * Clase para el manejo de la clase tablaFrecuencias, consistente en un par
- * 
+ * Clase para el manejo de la clase TablaFrecuencias, consistente en un una
+ * lista de objetos clase Letras
  */
 package Funcionalidad;
 
@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author Carlos Naranjo Sánchez
  */
-public class tablaFrecuencias {
+public class TablaFrecuencias {
 
     private final LinkedList<Letra> lista;
 
@@ -25,7 +25,7 @@ public class tablaFrecuencias {
         return fin;
     }
 
-    public tablaFrecuencias() {
+    public TablaFrecuencias() {
         lista = new LinkedList<>();
         procesada = false;
         cuenta = fin = 0;
@@ -49,6 +49,9 @@ public class tablaFrecuencias {
         }
     }
 
+    /**
+     * Función para calcular la probabilidad de cada letra
+     */
     public void procesar() {
         if (!procesada) {lista.stream().forEach((lista1) -> {
                 lista1.fr /= cuenta;
@@ -91,7 +94,7 @@ public class tablaFrecuencias {
             try {
                 throw new Exception("No se puede devolver una lista no procesada");
             } catch (Exception ex) {
-                Logger.getLogger(tablaFrecuencias.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TablaFrecuencias.class.getName()).log(Level.SEVERE, null, ex);
                 return null;
             }
         }

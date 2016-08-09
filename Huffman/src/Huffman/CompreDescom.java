@@ -29,12 +29,18 @@ import trabajarBits.BitOutputStream;
  */
 public class CompreDescom {
 
+    /**
+     * Función para crear un archivo que contendrá el árbol usado como 
+     * diccionario
+     * @param arbol el árbol a guardar
+     * @param nombreDicc el nombre que tendrá el archivo
+     * @throws IOException 
+     */
     public static void escribeDicci(ArbolHuffman arbol, String nombreDicc) throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nombreDicc))) {
             oos.writeObject(arbol);
             oos.close();
         }
-
     }
 
     /**
@@ -98,16 +104,16 @@ public class CompreDescom {
      * Funciona para decoficar una cadena de 0,1s que terminará en -1
      *
      * @param dicc el diccionario huffman
-     * @param texto
-     * @param nuevo
+     * @param rutaTexto la ruta al txt seleccionado
+     * @param nuevo el nombre del nuevo archivo
      * @throws java.io.FileNotFoundException
      * @throws java.io.UnsupportedEncodingException
      */
-    public static void codificar(ArbolHuffman dicc, String texto, String nuevo) throws FileNotFoundException, UnsupportedEncodingException, IOException {
+    public static void codificar(ArbolHuffman dicc, String rutaTexto, String nuevo) throws FileNotFoundException, UnsupportedEncodingException, IOException {
         HashMap<Integer, String> d = creaDicc(dicc);
         char[] codigoBinario;
 
-        FileInputStream fis = new FileInputStream(texto);
+        FileInputStream fis = new FileInputStream(rutaTexto);
         InputStreamReader is = new InputStreamReader(fis, "ISO-8859-1");
         try (BufferedReader bf = new BufferedReader(is); BitOutputStream bos = new BitOutputStream(nuevo)) {
             

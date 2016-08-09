@@ -7,7 +7,9 @@ public class CodigoHuffman {
 
     // input is an array of frequencies, indexed by character code
     public static ArbolHuffman construyeArbol(LinkedList<Letra> frecChar) {
+
         PriorityQueue<ArbolHuffman> arboles = new PriorityQueue<>();
+
         // Inicialmente tenemos un bosque de hojas
         // una para cada caracter no vacio
         frecChar.stream().forEach((i) -> {
@@ -28,10 +30,8 @@ public class CodigoHuffman {
         return arboles.poll();
     }
 
-    public static ArbolHuffman Huffman(LinkedList<Letra> args) {
-
-        return construyeArbol(args);
+    public static ArbolHuffman Huffman(LinkedList<Letra> listaLetras) {
+        return construyeArbol(listaLetras);
     }
-
 
 }
