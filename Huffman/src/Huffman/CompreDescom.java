@@ -147,7 +147,7 @@ public class CompreDescom {
     
     /**
      * Método para calcular la longitud con la fórmula L(C)=S[Pk*Lk]
-     * @param dicc
+     * @param dicc el diccionario o árbol al que calcularle la longitud
      * @return la longitud media
      */
     public static float DameLongitud(ArbolHuffman dicc) {
@@ -155,6 +155,11 @@ public class CompreDescom {
         dameLongitud(dicc, new StringBuffer());
         return Longitud;
     }
+    /**
+     * Método recuersivo auxiliar para calcular la longitud media
+     * @param arbol
+     * @param prefix la cadena donde se guardaran las palabras-código
+     */
     private static void dameLongitud(ArbolHuffman arbol, StringBuffer prefix) {
         assert arbol != null;
         if (arbol instanceof HojaHuffman) {
@@ -180,9 +185,7 @@ public class CompreDescom {
         assert arbol != null;
         if (arbol instanceof HojaHuffman) {
             HojaHuffman leaf = (HojaHuffman) arbol;
-
             d.put(leaf.letras.n, prefix.toString());
-            Longitud+=leaf.frecuencia*prefix.toString().length();
 
         } else if (arbol instanceof NodoHuffman) {
             NodoHuffman nodo = (NodoHuffman) arbol;
