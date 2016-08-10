@@ -16,7 +16,6 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +28,8 @@ import trabajarBits.BitOutputStream;
  */
 public class CompreDescom {
 
+    private static float Longitud=0;
+    
     /**
      * Función para crear un archivo que contendrá el árbol usado como 
      * diccionario
@@ -145,28 +146,43 @@ public class CompreDescom {
     }
     
     /**
-     * 
+     * Método para calcular la longitud con la fórmula L(C)=S[Pk*Lk]
      * @param dicc
-     * @return 
+     * @return la longitud media
      */
     public static float DameLongitud(ArbolHuffman dicc) {
-        HashMap<Integer, String> d = new HashMap<>();
-        construyeMap(dicc, new StringBuffer(), d);
-        Collection<String> add = d.values();
-        float n=0;
-        for (String s : add) {
-            n+=s.length();
-        }
-        n/=add.size();
-        return n;
+        Longitud=0;
+        dameLongitud(dicc, new StringBuffer());
+        return Longitud;
     }
+    private static void dameLongitud(ArbolHuffman arbol, StringBuffer prefix) {
+        assert arbol != null;
+        if (arbol instanceof HojaHuffman) {
+            HojaHuffman leaf = (HojaHuffman) arbol;
+            Longitud+=leaf.frecuencia*prefix.length();
 
+        } else if (arbol instanceof NodoHuffman) {
+            NodoHuffman nodo = (NodoHuffman) arbol;
+
+            // rama izquierda
+            prefix.append('0');
+            dameLongitud(nodo.izquierda, prefix);
+            prefix.deleteCharAt(prefix.length() - 1);
+
+            // rama derecha
+            prefix.append('1');
+            dameLongitud(nodo.derecha, prefix);
+            prefix.deleteCharAt(prefix.length() - 1);
+        }
+    }
+    
     private static void construyeMap(ArbolHuffman arbol, StringBuffer prefix, HashMap<Integer, String> d) {
         assert arbol != null;
         if (arbol instanceof HojaHuffman) {
             HojaHuffman leaf = (HojaHuffman) arbol;
 
             d.put(leaf.letras.n, prefix.toString());
+            Longitud+=leaf.frecuencia*prefix.toString().length();
 
         } else if (arbol instanceof NodoHuffman) {
             NodoHuffman nodo = (NodoHuffman) arbol;
