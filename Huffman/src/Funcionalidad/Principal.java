@@ -87,6 +87,10 @@ public class Principal {
                 tf.insertar((char) car);
                 car = bf.read();
             }
+            //insertar char final
+            car = 3;
+            tf.insertar((char)car);
+            
             tf.ordenar();
 
             tf.procesar();

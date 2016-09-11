@@ -28,6 +28,8 @@ public class Interfaz extends javax.swing.JFrame {
         initComponents();
         this.setTitle("CNS Huffman");
         frec = new Funcionalidad.Principal(textoConsola);
+
+        
     }
 
     /**
@@ -453,7 +455,7 @@ public class Interfaz extends javax.swing.JFrame {
         textoCotaInferior.setText(Float.toString(entro));
         textoCotaSuperior.setText(Float.toString(entro + (float) frec.getfrecmax() + 0.082f));
         textoLongitudMedia.setText(Integer.toString((int) (100 - (((entro + 0.5f) * 100) / 7))));
-        textoLongitudMedia.setText(CompreDescom.DameLongitud(frec.getDic())+"");
+        textoLongitudMedia.setText(CompreDescom.DameLongitud(frec.getDic()) + "");
     }//GEN-LAST:event_botonAnalizarActionPerformed
 
     private void textoAnalizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textoAnalizarMouseClicked

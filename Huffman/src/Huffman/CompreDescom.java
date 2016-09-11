@@ -28,14 +28,15 @@ import trabajarBits.BitOutputStream;
  */
 public class CompreDescom {
 
-    private static float Longitud=0;
-    
+    private static float Longitud = 0;
+
     /**
-     * Función para crear un archivo que contendrá el árbol usado como 
+     * Función para crear un archivo que contendrá el árbol usado como
      * diccionario
+     *
      * @param arbol el árbol a guardar
      * @param nombreDicc el nombre que tendrá el archivo
-     * @throws IOException 
+     * @throws IOException
      */
     public static void escribeDicci(ArbolHuffman arbol, String nombreDicc) throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nombreDicc))) {
@@ -47,6 +48,7 @@ public class CompreDescom {
     /**
      * Dada una ruta absoluta a un diccionario Huffman, lo lee y lo prepara para
      * el programa
+     *
      * @param ruta La ruta al diccionario Huffman
      * @return Devuelve una estructura de árbol Huffman
      */
@@ -66,19 +68,28 @@ public class CompreDescom {
     /**
      * Función para descomprimir un archivo codificado con un diccionario
      * Huffman
+     *
      * @param ruta la ruta al archivo comprimido
      * @param dic el diccionario con el se comprimió el texto
-     * @throws IOException 
+     * @throws IOException
      */
     public static void decodificar(String ruta, ArbolHuffman dic) throws IOException {
         try (BitInputStream textoCod = new BitInputStream(ruta); BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + "_deco.txt"))) {
 
             ArbolHuffman actual = dic;
             int bit = textoCod.readBits(1);
-            while (bit != -1) {
+            boolean finalEncontrado = false;
+            int letraLeida;
+            //el caracter 3 es final de texto
+            while (!finalEncontrado) {
                 actual = decodifica((NodoHuffman) actual, bit);
                 if (actual instanceof HojaHuffman) {
-                    bw.write((char)((HojaHuffman) actual).letras.n);
+                    letraLeida = ((HojaHuffman) actual).letras.n;
+                    if (letraLeida == 3) {
+                        finalEncontrado = true;
+                    } else {
+                        bw.write((char) letraLeida);
+                    }
                     actual = dic;
                 }
                 bit = textoCod.readBits(1);
@@ -89,6 +100,7 @@ public class CompreDescom {
 
     /**
      * Utilidad para moverse por el árbol
+     *
      * @param nodo nodo actual
      * @param bit bit que indica izquierda o derecha
      * @return nodo siguiente
@@ -117,18 +129,25 @@ public class CompreDescom {
         FileInputStream fis = new FileInputStream(rutaTexto);
         InputStreamReader is = new InputStreamReader(fis, "ISO-8859-1");
         try (BufferedReader bf = new BufferedReader(is); BitOutputStream bos = new BitOutputStream(nuevo)) {
-            
+
             int caracter;
             caracter = bf.read();
             while (caracter != -1) {
                 codigoBinario = d.get(caracter).toCharArray();
-                
-                
+
                 for (int i = 0; i < codigoBinario.length; i++) {
                     bos.writeBits(1, Integer.valueOf(codigoBinario[i]));
                 }
                 caracter = bf.read();
             }
+
+            //Fin de texto es char 3
+            codigoBinario = d.get(3).toCharArray();
+
+            for (int i = 0; i < codigoBinario.length; i++) {
+                bos.writeBits(1, Integer.valueOf(codigoBinario[i]));
+            }
+
             bf.close();
             bos.close();
         }
@@ -136,6 +155,7 @@ public class CompreDescom {
 
     /**
      * A partir de un árbol Huffman, crea un diccionario clave valor
+     *
      * @param dicc el árbol Huffman
      * @return el diccionario clave valor
      */
@@ -144,19 +164,22 @@ public class CompreDescom {
         construyeMap(dicc, new StringBuffer(), d);
         return d;
     }
-    
+
     /**
      * Método para calcular la longitud con la fórmula L(C)=S[Pk*Lk]
+     *
      * @param dicc el diccionario o árbol al que calcularle la longitud
      * @return la longitud media
      */
     public static float DameLongitud(ArbolHuffman dicc) {
-        Longitud=0;
+        Longitud = 0;
         dameLongitud(dicc, new StringBuffer());
         return Longitud;
     }
+
     /**
      * Método recuersivo auxiliar para calcular la longitud media
+     *
      * @param arbol
      * @param prefix la cadena donde se guardaran las palabras-código
      */
@@ -164,7 +187,7 @@ public class CompreDescom {
         assert arbol != null;
         if (arbol instanceof HojaHuffman) {
             HojaHuffman leaf = (HojaHuffman) arbol;
-            Longitud+=leaf.frecuencia*prefix.length();
+            Longitud += leaf.frecuencia * prefix.length();
 
         } else if (arbol instanceof NodoHuffman) {
             NodoHuffman nodo = (NodoHuffman) arbol;
@@ -180,7 +203,7 @@ public class CompreDescom {
             prefix.deleteCharAt(prefix.length() - 1);
         }
     }
-    
+
     private static void construyeMap(ArbolHuffman arbol, StringBuffer prefix, HashMap<Integer, String> d) {
         assert arbol != null;
         if (arbol instanceof HojaHuffman) {
