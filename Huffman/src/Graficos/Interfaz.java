@@ -17,7 +17,7 @@ import javax.swing.JFileChooser;
  * @author unake
  */
 public class Interfaz extends javax.swing.JFrame {
-
+    
     Funcionalidad.Principal frec;
     String ultimoDic;
 
@@ -28,7 +28,8 @@ public class Interfaz extends javax.swing.JFrame {
         initComponents();
         this.setTitle("CNS Huffman");
         frec = new Funcionalidad.Principal(textoConsola);
-
+        labelTiempoCompre.setVisible(false);
+        labelTiempoDescomp.setVisible(false);
         
     }
 
@@ -73,6 +74,7 @@ public class Interfaz extends javax.swing.JFrame {
         textoCompReal = new javax.swing.JTextField();
         botonArchivoCom = new javax.swing.JButton();
         botonDiccComp = new javax.swing.JButton();
+        labelTiempoCompre = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         textoTextoDescom = new javax.swing.JTextField();
@@ -84,6 +86,7 @@ public class Interfaz extends javax.swing.JFrame {
         textoDiccionDescomp = new javax.swing.JTextField();
         botonTextoADescom = new javax.swing.JButton();
         BotonDiccAdescom = new javax.swing.JButton();
+        labelTiempoDescomp = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -285,6 +288,8 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        labelTiempoCompre.setText("jLabel11");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -309,9 +314,10 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(textoTextAcomp)
                     .addComponent(textoCompReal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonArchivoCom)
-                    .addComponent(botonDiccComp))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(botonArchivoCom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonDiccComp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelTiempoCompre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(55, 55, 55))
         );
         jPanel2Layout.setVerticalGroup(
@@ -330,7 +336,8 @@ public class Interfaz extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(textoCompReal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textoCompReal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelTiempoCompre))
                 .addGap(57, 57, 57)
                 .addComponent(jButton1)
                 .addGap(70, 70, 70))
@@ -374,6 +381,8 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        labelTiempoDescomp.setText("jLabel11");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -382,29 +391,32 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGap(219, 219, 219))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonDescompresion)
-                .addGap(195, 195, 195))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel10))
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textoTextoDescom)
+                                    .addComponent(textoDiccionDescomp, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(botonTextoADescom)
+                                    .addComponent(BotonDiccAdescom))
+                                .addGap(0, 137, Short.MAX_VALUE)))
                         .addContainerGap())
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel10))
-                        .addGap(30, 30, 30)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textoTextoDescom)
-                            .addComponent(textoDiccionDescomp, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonTextoADescom)
-                            .addComponent(BotonDiccAdescom))
-                        .addContainerGap(147, Short.MAX_VALUE))))
+                            .addComponent(botonDescompresion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelTiempoDescomp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(195, 195, 195))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,7 +437,9 @@ public class Interfaz extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonDescompresion)
-                .addGap(27, 27, 27))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelTiempoDescomp)
+                .addGap(7, 7, 7))
         );
 
         jTabbedPane1.addTab("Descompresión", jPanel3);
@@ -475,7 +489,12 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
+            Long Tiempo;
+            Tiempo = System.currentTimeMillis();
             CompreDescom.codificar(CompreDescom.leeDicc(textoDicAcom.getText()), textoTextAcomp.getText(), (textoTextAcomp.getText() + "_comp.bin"));
+            Tiempo = System.currentTimeMillis() - Tiempo;
+            labelTiempoCompre.setText(Tiempo.toString()+ " milisegundos");
+            labelTiempoCompre.setVisible(true);
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -486,7 +505,13 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void botonDescompresionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDescompresionActionPerformed
         try {
+            Long Tiempo;
+            Tiempo = System.currentTimeMillis();
             CompreDescom.decodificar(textoTextoDescom.getText(), CompreDescom.leeDicc(textoDiccionDescomp.getText()));
+            Tiempo = System.currentTimeMillis() - Tiempo;
+            labelTiempoDescomp.setText(Tiempo.toString() + " milisegundos");
+            labelTiempoDescomp.setVisible(true);
+            
         } catch (IOException ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -603,6 +628,8 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel labelTiempoCompre;
+    private javax.swing.JLabel labelTiempoDescomp;
     private javax.swing.JTextPane textoAnalizar;
     private javax.swing.JTextField textoCompReal;
     private javax.swing.JTextArea textoConsola;
