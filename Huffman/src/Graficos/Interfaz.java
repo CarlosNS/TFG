@@ -6,6 +6,7 @@
 package Graficos;
 
 import Huffman.CompreDescom;
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
@@ -495,6 +496,17 @@ public class Interfaz extends javax.swing.JFrame {
             Tiempo = System.currentTimeMillis() - Tiempo;
             labelTiempoCompre.setText(Tiempo.toString()+ " milisegundos");
             labelTiempoCompre.setVisible(true);
+            
+            File viejo = new File(textoTextAcomp.getText());
+            File nuevo = new File(textoTextAcomp.getText()+"_comp.bin");
+            System.out.println(textoTextAcomp.getText());
+            double lviejo = new Double(viejo.length());
+            double lnuevo = new Double(nuevo.length());
+            System.out.println((lnuevo/lviejo));
+            Double porcentaje = 100-(lnuevo/lviejo)*100;
+            textoCompReal.setText(porcentaje.toString());
+            
+            
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
