@@ -122,7 +122,7 @@ public class CompreDescom {
      * @throws java.io.FileNotFoundException
      * @throws java.io.UnsupportedEncodingException
      */
-    public static void codificar(ArbolHuffman dicc, String rutaTexto, String nuevo) throws FileNotFoundException, UnsupportedEncodingException, IOException {
+    public static void codificar(ArbolHuffman dicc, String rutaTexto, String nuevo) throws FileNotFoundException, UnsupportedEncodingException, IOException, Exception {
         HashMap<Integer, String> d = creaDicc(dicc);
         char[] codigoBinario;
 
@@ -133,6 +133,9 @@ public class CompreDescom {
             int caracter;
             caracter = bf.read();
             while (caracter != -1) {
+                if(!d.containsKey(caracter)){
+                    throw new Exception("El caracter no se encuentra en el diccionario");
+                }
                 codigoBinario = d.get(caracter).toCharArray();
 
                 for (int i = 0; i < codigoBinario.length; i++) {
