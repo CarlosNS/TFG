@@ -5,6 +5,8 @@
  */
 package Graficos;
 
+import Excepciones.ExcepcionDiccionarioIncompleto;
+import Excepciones.ExcepcionNoExisteEnDicc;
 import Huffman.CompreDescom;
 import java.io.File;
 import java.io.IOException;
@@ -83,11 +85,10 @@ public class Interfaz extends javax.swing.JFrame {
         labelTiempoCompre = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         botonRutaNuevoComprimido = new javax.swing.JButton();
+        labelErroresComprimir = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         textoTextoDescom = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        textoPreview = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         botonDescompresion = new javax.swing.JButton();
@@ -95,6 +96,7 @@ public class Interfaz extends javax.swing.JFrame {
         botonTextoADescom = new javax.swing.JButton();
         BotonDiccAdescom = new javax.swing.JButton();
         labelTiempoDescomp = new javax.swing.JLabel();
+        labelErroresDescomprimir = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -317,6 +319,8 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        labelErroresComprimir.setText("CajaErrores");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -325,42 +329,47 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGap(179, 179, 179)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addGap(45, 45, 45)
-                .addComponent(textoCompReal, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelTiempoCompre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(81, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(41, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botonRutaNuevoComprimido))
+                        .addComponent(labelErroresComprimir)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(53, 53, 53))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(62, 62, 62)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(textoDicAcom, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                            .addComponent(textoTextAcomp))
+                        .addComponent(jLabel5)
+                        .addGap(45, 45, 45)
+                        .addComponent(textoCompReal, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(botonArchivoCom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonDiccComp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(55, 55, 55))
+                        .addComponent(labelTiempoCompre, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 30, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(botonRutaNuevoComprimido))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(53, 53, 53))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(62, 62, 62)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(textoDicAcom, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textoTextAcomp, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(botonArchivoCom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(botonDiccComp))))
+                        .addGap(65, 65, 65))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(115, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(textoTextAcomp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -374,12 +383,14 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(botonRutaNuevoComprimido))
-                .addGap(8, 8, 8)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(textoCompReal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelTiempoCompre))
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
+                .addComponent(labelErroresComprimir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(70, 70, 70))
         );
@@ -389,11 +400,6 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel8.setText("Texto");
 
         textoTextoDescom.setEditable(false);
-
-        textoPreview.setEditable(false);
-        textoPreview.setColumns(20);
-        textoPreview.setRows(5);
-        jScrollPane3.setViewportView(textoPreview);
 
         jLabel9.setText("Preview");
 
@@ -424,6 +430,8 @@ public class Interfaz extends javax.swing.JFrame {
 
         labelTiempoDescomp.setText("jLabel11");
 
+        labelErroresDescomprimir.setText("CajaErrores");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -437,27 +445,26 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel10))
-                                .addGap(30, 30, 30)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(textoTextoDescom)
-                                    .addComponent(textoDiccionDescomp, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(botonTextoADescom)
-                                    .addComponent(BotonDiccAdescom))
-                                .addGap(0, 159, Short.MAX_VALUE)))
-                        .addContainerGap())
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textoTextoDescom)
+                            .addComponent(textoDiccionDescomp, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botonTextoADescom)
+                            .addComponent(BotonDiccAdescom))
+                        .addContainerGap(169, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(botonDescompresion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(labelTiempoDescomp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(195, 195, 195))))
+                        .addGap(195, 195, 195))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(labelErroresDescomprimir)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -472,9 +479,9 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(textoDiccionDescomp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BotonDiccAdescom))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelErroresDescomprimir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonDescompresion)
@@ -534,21 +541,23 @@ public class Interfaz extends javax.swing.JFrame {
         Long Tiempo;
         Tiempo = System.currentTimeMillis();
         try {
-            CompreDescom.codificar(CompreDescom.leeDicc(textoDicAcom.getText()), textoTextAcomp.getText(), ubicacionNuevoComprimido.getAbsolutePath());
-        } catch (Exception ex) {
-            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+            CompreDescom.codificar(CompreDescom.leeDicc(textoDicAcom.getText()), textoTextAcomp.getText(), ubicacionNuevoComprimido.getAbsolutePath() + ".huf");
+            Tiempo = System.currentTimeMillis() - Tiempo;
+            labelTiempoCompre.setText(Tiempo.toString() + " milisegundos");
+            labelTiempoCompre.setVisible(true);
+            File viejo = new File(textoTextAcomp.getText());
+            File nuevo = ubicacionNuevoComprimido;
+            System.out.println(textoTextAcomp.getText());
+            double lviejo = new Double(viejo.length());
+            double lnuevo = new Double(nuevo.length());
+            System.out.println((lnuevo / lviejo));
+            Double porcentaje = 100 - (lnuevo / lviejo) * 100;
+            textoCompReal.setText(porcentaje.toString());
+        } catch (IOException | ExcepcionNoExisteEnDicc ex) {
+            labelErroresComprimir.setText(ex.getMessage());
+            ubicacionNuevoComprimido.delete();
         }
-        Tiempo = System.currentTimeMillis() - Tiempo;
-        labelTiempoCompre.setText(Tiempo.toString() + " milisegundos");
-        labelTiempoCompre.setVisible(true);
-        File viejo = new File(textoTextAcomp.getText());
-        File nuevo = ubicacionNuevoComprimido;
-        System.out.println(textoTextAcomp.getText());
-        double lviejo = new Double(viejo.length());
-        double lnuevo = new Double(nuevo.length());
-        System.out.println((lnuevo / lviejo));
-        Double porcentaje = 100 - (lnuevo / lviejo) * 100;
-        textoCompReal.setText(porcentaje.toString());
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -556,11 +565,14 @@ public class Interfaz extends javax.swing.JFrame {
         try {
             Long Tiempo;
             Tiempo = System.currentTimeMillis();
-            CompreDescom.decodificar(textoTextoDescom.getText(), CompreDescom.leeDicc(textoDiccionDescomp.getText()));
-            Tiempo = System.currentTimeMillis() - Tiempo;
-            labelTiempoDescomp.setText(Tiempo.toString() + " milisegundos");
-            labelTiempoDescomp.setVisible(true);
-
+            try {
+                CompreDescom.decodificar(textoTextoDescom.getText(), CompreDescom.leeDicc(textoDiccionDescomp.getText()));
+                Tiempo = System.currentTimeMillis() - Tiempo;
+                labelTiempoDescomp.setText(Tiempo.toString() + " milisegundos");
+                labelTiempoDescomp.setVisible(true);
+            } catch (ExcepcionDiccionarioIncompleto ex) {
+                labelErroresDescomprimir.setText("El archivo no ha sido codificado con el diccionario elegido");
+            }
         } catch (IOException ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -707,9 +719,10 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel labelErroresComprimir;
+    private javax.swing.JLabel labelErroresDescomprimir;
     private javax.swing.JLabel labelTiempoCompre;
     private javax.swing.JLabel labelTiempoDescomp;
     private javax.swing.JTextPane textoAnalizar;
@@ -720,7 +733,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JTextField textoDicAcom;
     private javax.swing.JTextField textoDiccionDescomp;
     private javax.swing.JTextField textoLongitudMedia;
-    private javax.swing.JTextArea textoPreview;
     private javax.swing.JTextField textoTextAcomp;
     private javax.swing.JTextField textoTextoDescom;
     // End of variables declaration//GEN-END:variables

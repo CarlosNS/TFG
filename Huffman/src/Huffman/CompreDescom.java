@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import trabajarBits.BitInputStream;
 import trabajarBits.BitOutputStream;
+import Excepciones.*;
 
 /**
  *
@@ -72,17 +73,24 @@ public class CompreDescom {
      * @param ruta la ruta al archivo comprimido
      * @param dic el diccionario con el se comprimió el texto
      * @throws IOException
+     * @throws Excepciones.ExcepcionDiccionarioIncompleto
      */
-    public static void decodificar(String ruta, ArbolHuffman dic) throws IOException {
+    public static void decodificar(String ruta, ArbolHuffman dic) throws IOException, ExcepcionDiccionarioIncompleto {
         try (BitInputStream textoCod = new BitInputStream(ruta); BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + "_deco.txt"))) {
 
             ArbolHuffman actual = dic;
             int bit = textoCod.readBits(1);
             boolean finalEncontrado = false;
             int letraLeida;
+            boolean errorNodo = false;
             //el caracter 3 es final de texto
-            while (!finalEncontrado) {
-                actual = decodifica((NodoHuffman) actual, bit);
+            while (!finalEncontrado && !errorNodo && bit!=-1) {
+                try {
+                    actual = decodifica((NodoHuffman) actual, bit);
+                } catch (ExcepcionNodoInexistente ex) {
+                    errorNodo = true;
+                    throw new ExcepcionDiccionarioIncompleto("Diccionario incorrecto");
+                }
                 if (actual instanceof HojaHuffman) {
                     letraLeida = ((HojaHuffman) actual).letras.n;
                     if (letraLeida == 3) {
@@ -105,12 +113,19 @@ public class CompreDescom {
      * @param bit bit que indica izquierda o derecha
      * @return nodo siguiente
      */
-    private static ArbolHuffman decodifica(NodoHuffman nodo, int bit) {
+    private static ArbolHuffman decodifica(NodoHuffman nodo, int bit) throws ExcepcionNodoInexistente {
         if (bit == 0) {
-            return nodo.izquierda;
-        } else {
+            if (nodo.izquierda != null) {
+                return nodo.izquierda;
+            } else {
+                throw new ExcepcionNodoInexistente("nodo inexistente");
+            }
+        } else if (nodo.derecha != null) {
             return nodo.derecha;
+        } else {
+            throw new ExcepcionNodoInexistente("nodo inexistente");
         }
+
     }
 
     /**
@@ -121,8 +136,9 @@ public class CompreDescom {
      * @param nuevo el nombre del nuevo archivo
      * @throws java.io.FileNotFoundException
      * @throws java.io.UnsupportedEncodingException
+     * @throws Excepciones.ExcepcionNoExisteEnDicc
      */
-    public static void codificar(ArbolHuffman dicc, String rutaTexto, String nuevo) throws FileNotFoundException, UnsupportedEncodingException, IOException, Exception {
+    public static void codificar(ArbolHuffman dicc, String rutaTexto, String nuevo) throws FileNotFoundException, UnsupportedEncodingException, IOException, ExcepcionNoExisteEnDicc {
         HashMap<Integer, String> d = creaDicc(dicc);
         char[] codigoBinario;
 
@@ -133,8 +149,8 @@ public class CompreDescom {
             int caracter;
             caracter = bf.read();
             while (caracter != -1) {
-                if(!d.containsKey(caracter)){
-                    throw new Exception("El caracter no se encuentra en el diccionario");
+                if (!d.containsKey(caracter)) {
+                    throw new ExcepcionNoExisteEnDicc("El caracter '" + (char) caracter + "' no se encuentra en el diccionario");
                 }
                 codigoBinario = d.get(caracter).toCharArray();
 
