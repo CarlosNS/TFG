@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 
 /**
  *
@@ -503,7 +504,7 @@ public class Interfaz extends javax.swing.JFrame {
         Long Tiempo;
         Tiempo = System.currentTimeMillis();
         try {
-            CompreDescom.codificar(CompreDescom.leeDicc(textoDicAcom.getText()), textoTextAcomp.getText(), ubicacionNuevoComprimido.getAbsolutePath() + ".huf");
+            CompreDescom.codificar(CompreDescom.leeDicc(textoDicAcom.getText()), textoTextAcomp.getText(), ubicacionNuevoComprimido.getAbsolutePath());
             Tiempo = System.currentTimeMillis() - Tiempo;
             labelTiempoCompre.setText(Tiempo.toString() + " milisegundos");
             labelTiempoCompre.setVisible(true);
@@ -543,6 +544,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JFileChooser elegir = new JFileChooser();
         elegir.showOpenDialog(null);
+
         if (elegir.getSelectedFile() != null) {
             String archivo = elegir.getSelectedFile().getAbsolutePath();
             textoAnalizar.setText(archivo);
@@ -562,6 +564,19 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void botonDiccCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDiccCompActionPerformed
         JFileChooser elegir = new JFileChooser();
+        FileFilter ff = new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                return file.getName().toLowerCase().endsWith(".dhf") || file.isDirectory();
+            }
+
+            @Override
+            public String getDescription() {
+                return "Diccionario Huffman";
+            }
+        };
+        elegir.setFileFilter(ff);
+
         elegir.showOpenDialog(null);
         if (elegir.getSelectedFile() != null) {
             String archivo = elegir.getSelectedFile().getAbsolutePath();
@@ -571,6 +586,19 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void botonTextoADescomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonTextoADescomActionPerformed
         JFileChooser elegir = new JFileChooser();
+        FileFilter ff = new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                return file.getName().toLowerCase().endsWith(".chf") || file.isDirectory();
+            }
+
+            @Override
+            public String getDescription() {
+                return "Comprimido Huffman";
+            }
+        };
+        elegir.setFileFilter(ff);
+        
         elegir.showOpenDialog(null);
         if (elegir.getSelectedFile() != null) {
             String archivo = elegir.getSelectedFile().getAbsolutePath();
@@ -581,6 +609,18 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void BotonDiccAdescomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDiccAdescomActionPerformed
         JFileChooser elegir = new JFileChooser();
+        FileFilter ff = new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                return file.getName().toLowerCase().endsWith(".dhf") || file.isDirectory();
+            }
+
+            @Override
+            public String getDescription() {
+                return "Diccionario Huffman";
+            }
+        };
+        elegir.setFileFilter(ff);
         elegir.showOpenDialog(null);
         if (elegir.getSelectedFile() != null) {
             String archivo = elegir.getSelectedFile().getAbsolutePath();
@@ -627,7 +667,7 @@ public class Interfaz extends javax.swing.JFrame {
                 if ("Windows".equals(info.getName()) || "GTK+".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                } 
+                }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);

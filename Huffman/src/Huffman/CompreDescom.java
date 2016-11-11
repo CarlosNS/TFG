@@ -40,7 +40,7 @@ public class CompreDescom {
      * @throws IOException
      */
     public static void escribeDicci(ArbolHuffman arbol, String nombreDicc) throws IOException {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nombreDicc))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nombreDicc+".dhf"))) {
             oos.writeObject(arbol);
             oos.close();
         }
@@ -144,7 +144,7 @@ public class CompreDescom {
 
         FileInputStream fis = new FileInputStream(rutaTexto);
         InputStreamReader is = new InputStreamReader(fis, "ISO-8859-1");
-        try (BufferedReader bf = new BufferedReader(is); BitOutputStream bos = new BitOutputStream(nuevo)) {
+        try (BufferedReader bf = new BufferedReader(is); BitOutputStream bos = new BitOutputStream(nuevo+".chf")) {
 
             int caracter;
             caracter = bf.read();
