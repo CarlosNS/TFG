@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import trabajarBits.BitInputStream;
 import trabajarBits.BitOutputStream;
 import Excepciones.*;
+import java.io.OutputStreamWriter;
 
 /**
  *
@@ -76,7 +77,8 @@ public class CompreDescom {
      * @throws Excepciones.ExcepcionDiccionarioIncompleto
      */
     public static void decodificar(String ruta, ArbolHuffman dic) throws IOException, ExcepcionDiccionarioIncompleto {
-        try (BitInputStream textoCod = new BitInputStream(ruta); BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + "_deco.txt"))) {
+        try (BitInputStream textoCod = new BitInputStream(ruta); 
+                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ruta + "_deco.txt"),"8859_1"))) {
 
             ArbolHuffman actual = dic;
             int bit = textoCod.readBits(1);
