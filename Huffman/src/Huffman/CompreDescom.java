@@ -10,7 +10,6 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
@@ -88,7 +87,7 @@ public class CompreDescom {
             //el caracter 3 es final de texto
             while (!finalEncontrado && !errorNodo && bit!=-1) {
                 try {
-                    actual = decodifica((NodoHuffman) actual, bit);
+                    actual = decodifica((ArbolHuffman.NodoHuffman) actual, bit);
                 } catch (ExcepcionNodoInexistente ex) {
                     errorNodo = true;
                     throw new ExcepcionDiccionarioIncompleto("Diccionario incorrecto");
@@ -115,7 +114,7 @@ public class CompreDescom {
      * @param bit bit que indica izquierda o derecha
      * @return nodo siguiente
      */
-    private static ArbolHuffman decodifica(NodoHuffman nodo, int bit) throws ExcepcionNodoInexistente {
+    private static ArbolHuffman decodifica(ArbolHuffman.NodoHuffman nodo, int bit) throws ExcepcionNodoInexistente {
         if (bit == 0) {
             if (nodo.izquierda != null) {
                 return nodo.izquierda;
@@ -210,8 +209,8 @@ public class CompreDescom {
             HojaHuffman leaf = (HojaHuffman) arbol;
             Longitud += leaf.frecuencia * prefix.length();
 
-        } else if (arbol instanceof NodoHuffman) {
-            NodoHuffman nodo = (NodoHuffman) arbol;
+        } else if (arbol instanceof ArbolHuffman.NodoHuffman) {
+            ArbolHuffman.NodoHuffman nodo = (ArbolHuffman.NodoHuffman) arbol;
 
             // rama izquierda
             prefix.append('0');
@@ -231,8 +230,8 @@ public class CompreDescom {
             HojaHuffman leaf = (HojaHuffman) arbol;
             d.put(leaf.letras.n, prefix.toString());
 
-        } else if (arbol instanceof NodoHuffman) {
-            NodoHuffman nodo = (NodoHuffman) arbol;
+        } else if (arbol instanceof ArbolHuffman.NodoHuffman) {
+            ArbolHuffman.NodoHuffman nodo = (ArbolHuffman.NodoHuffman) arbol;
 
             // rama izquierda
             prefix.append('0');

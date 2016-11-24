@@ -5,7 +5,6 @@ import java.util.*;
 
 public class CodigoHuffman {
 
-    // input is an array of frequencies, indexed by character code
     public static ArbolHuffman construyeArbol(LinkedList<Letra> frecChar) {
 
         PriorityQueue<ArbolHuffman> arboles = new PriorityQueue<>();
@@ -17,21 +16,24 @@ public class CodigoHuffman {
         });
 
         assert arboles.size() > 0;
-        // loop until there is only one tree izquierda
+        // repetir hasta que sólo quede un árbol a la izquierda
         while (arboles.size() > 1) {
-            // two trees with least frequency
             //poll quita la cabeza
             ArbolHuffman a = arboles.poll();
             ArbolHuffman b = arboles.poll();
 
             // put into new node and re-insert into queue
-            arboles.offer(new NodoHuffman(a, b));
+            arboles.offer(new ArbolHuffman.NodoHuffman(a, b));
         }
         return arboles.poll();
     }
 
     public static ArbolHuffman Huffman(LinkedList<Letra> listaLetras) {
         return construyeArbol(listaLetras);
+    }
+    
+    public static ArbolHuffman Doble(LinkedList<Letra> uno, LinkedList<Letra> dos){
+        return new ArbolHuffman.NodoHuffman(construyeArbol(uno), construyeArbol(dos));
     }
 
 }

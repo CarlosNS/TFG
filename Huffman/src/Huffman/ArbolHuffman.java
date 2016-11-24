@@ -62,6 +62,22 @@ public abstract class ArbolHuffman implements Comparable<ArbolHuffman>, Serializ
         }
     }
 
+    /**
+     *
+     * @author Carlos
+     */
+    static class NodoHuffman extends ArbolHuffman implements Serializable {
+
+        public final ArbolHuffman izquierda;
+        public final ArbolHuffman derecha; // subarboles
+
+        public NodoHuffman(ArbolHuffman l, ArbolHuffman r) {
+            super(l.frecuencia + r.frecuencia);
+            izquierda = l;
+            derecha = r;
+        }
+    }
+
 }
 
 class HojaHuffman extends ArbolHuffman implements Serializable {
@@ -78,13 +94,3 @@ class HojaHuffman extends ArbolHuffman implements Serializable {
     }
 }
 
-class NodoHuffman extends ArbolHuffman implements Serializable {
-
-    public final ArbolHuffman izquierda, derecha; // subarboles
-
-    public NodoHuffman(ArbolHuffman l, ArbolHuffman r) {
-        super(l.frecuencia + r.frecuencia);
-        izquierda = l;
-        derecha = r;
-    }
-}

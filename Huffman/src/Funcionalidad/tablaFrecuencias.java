@@ -6,8 +6,6 @@ package Funcionalidad;
 
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -21,6 +19,10 @@ public class TablaFrecuencias {
     private int fin;
     private int cuenta;
 
+    public int getCuenta() {
+        return cuenta;
+    }
+
     public int getFin() {
         return fin;
     }
@@ -29,6 +31,18 @@ public class TablaFrecuencias {
         lista = new LinkedList<>();
         procesada = false;
         cuenta = fin = 0;
+    }
+    
+    public TablaFrecuencias subTabla(int inicio, int fin) throws IndexOutOfBoundsException{
+        if(procesada && inicio>=0 && fin<=this.fin){
+            TablaFrecuencias dev = new TablaFrecuencias();
+            for (int i = inicio; i < fin; i++) {
+                dev.insertar((char) lista.get(i).n);
+            }
+            return dev;
+        }else{
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     //10 es salto de linea, 13, retorno de carro
@@ -87,17 +101,7 @@ public class TablaFrecuencias {
     }
 
     public LinkedList<Letra> getLista() {
-
-        if (procesada) {
-            return lista;
-        } else {
-            try {
-                throw new Exception("No se puede devolver una lista no procesada");
-            } catch (Exception ex) {
-                Logger.getLogger(TablaFrecuencias.class.getName()).log(Level.SEVERE, null, ex);
-                return null;
-            }
-        }
+        return lista;
     }
 
 }

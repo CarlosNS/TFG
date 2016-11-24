@@ -22,11 +22,21 @@ import javax.swing.JTextArea;
 public class Principal {
 
     static JTextArea consola;
-    private ArbolHuffman dic;
+    private ArbolHuffman dic, dicdoble;
     private double frecmax;
+    private boolean doble = false;
 
     public ArbolHuffman getDic() {
-        return dic;
+        if (doble) {
+            return dicdoble;
+        } else {
+            return dic;
+        }
+    }
+
+    public boolean setDoble() {
+        doble = !doble;
+        return doble;
     }
 
     /**
@@ -54,14 +64,11 @@ public class Principal {
         for (int i = 32; i < 127; i++) {
             relleno[i - 32] = (char) i;
         }
-        
-        
 
         //ISO 8859-1
         for (int i = 161; i < 256; i++) {
             relleno[i - 161 + 95] = (char) i;
         }
-        
 
         for (int i = 0; i < relleno.length; i++) {
             tf.insertar(relleno[i]);
@@ -89,14 +96,21 @@ public class Principal {
             }
             //insertar char final
             car = 3;
-            tf.insertar((char)car);
-            
+            tf.insertar((char) car);
+
             tf.ordenar();
 
             tf.procesar();
             frecmax = tf.getLista().get(0).fr;
 
-            dic = Huffman.CodigoHuffman.Huffman(tf.getLista());
+            if (doble) {
+                TablaFrecuencias primera = tf.subTabla(0, tf.getFin() / 2);
+                TablaFrecuencias segunda = tf.subTabla(tf.getFin()/ 2, tf.getFin());
+
+                dicdoble = Huffman.CodigoHuffman.Doble(primera.getLista(), segunda.getLista());
+            } else {
+                dic = Huffman.CodigoHuffman.Huffman(tf.getLista());
+            }
             consola.setText(tf.toString());
             return entropia(tf);
         } catch (IOException ex) {

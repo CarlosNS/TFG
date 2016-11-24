@@ -17,7 +17,7 @@ import javax.swing.filechooser.FileFilter;
 
 /**
  *
- * @author unake
+ * @author Carlos Naranjo Sánchez
  */
 public class Interfaz extends javax.swing.JFrame {
 
@@ -67,6 +67,7 @@ public class Interfaz extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         checkEstandar = new javax.swing.JCheckBox();
         botonGuardarDicc = new javax.swing.JButton();
+        CheckBoxGrupos = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         textoDicAcom = new javax.swing.JTextField();
         textoTextAcomp = new javax.swing.JTextField();
@@ -174,22 +175,35 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        CheckBoxGrupos.setText("Diccionario en dos grupos");
+        CheckBoxGrupos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckBoxGruposActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(227, 227, 227))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel1)
                         .addGap(185, 185, 185)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botonAnalizar)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 47, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(etiquetaEstadoDicc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
@@ -200,16 +214,11 @@ public class Interfaz extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(botonGuardarDicc)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botonDiccionario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(etiquetaEstadoDicc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(botonDiccionario)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(checkEstandar)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -219,11 +228,12 @@ public class Interfaz extends javax.swing.JFrame {
                         .addComponent(textoCotaInferior)
                         .addGap(18, 18, 18)
                         .addComponent(textoCotaSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(249, 249, 249))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(227, 227, 227))
+                        .addGap(249, 249, 249))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CheckBoxGrupos)
+                            .addComponent(checkEstandar))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,17 +253,20 @@ public class Interfaz extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(checkEstandar)
-                .addGap(12, 12, 12)
+                .addGap(3, 3, 3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(etiquetaEstadoDicc, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CheckBoxGrupos))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(botonDiccionario)
-                    .addComponent(etiquetaEstadoDicc, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonGuardarDicc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(textoLongitudMedia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58))
+                .addGap(24, 24, 24))
         );
 
         jTabbedPane1.addTab("Crear Diccionario", jPanel1);
@@ -276,6 +289,8 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel7.setText("Texto a comprimir");
 
         textoCompReal.setEditable(false);
+        textoCompReal.setEnabled(false);
+        textoCompReal.setFocusCycleRoot(true);
 
         botonArchivoCom.setText("Seleccionar archivo");
         botonArchivoCom.addActionListener(new java.awt.event.ActionListener() {
@@ -368,7 +383,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addComponent(labelErroresComprimir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Compresion", jPanel2);
@@ -450,7 +465,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonDescompresion)
                     .addComponent(labelTiempoDescomp))
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(252, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Descompresión", jPanel3);
@@ -463,7 +478,7 @@ public class Interfaz extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1)
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("Crear Diccionario");
@@ -497,7 +512,6 @@ public class Interfaz extends javax.swing.JFrame {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
             etiquetaEstadoDicc.setText("Error al crear el diccionario");
         }
-
     }//GEN-LAST:event_botonDiccionarioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -508,14 +522,14 @@ public class Interfaz extends javax.swing.JFrame {
             Tiempo = System.currentTimeMillis() - Tiempo;
             labelTiempoCompre.setText(Tiempo.toString() + " milisegundos");
             labelTiempoCompre.setVisible(true);
+            
             File viejo = new File(textoTextAcomp.getText());
-            File nuevo = ubicacionNuevoComprimido;
-            System.out.println(textoTextAcomp.getText());
+            File nuevo = new File(ubicacionNuevoComprimido.getAbsolutePath()+".chf");
             double lviejo = new Double(viejo.length());
             double lnuevo = new Double(nuevo.length());
-            System.out.println((lnuevo / lviejo));
+            
             Double porcentaje = 100 - (lnuevo / lviejo) * 100;
-            textoCompReal.setText(porcentaje.toString());
+            textoCompReal.setText(String.valueOf(porcentaje).substring(0, 5)+"%");
         } catch (IOException | ExcepcionNoExisteEnDicc ex) {
             labelErroresComprimir.setText(ex.getMessage());
             ubicacionNuevoComprimido.delete();
@@ -653,6 +667,10 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonRutaNuevoComprimidoActionPerformed
 
+    private void CheckBoxGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxGruposActionPerformed
+        frec.setDoble();    
+    }//GEN-LAST:event_CheckBoxGruposActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -688,6 +706,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonDiccAdescom;
+    private javax.swing.JCheckBox CheckBoxGrupos;
     private javax.swing.JButton botonAnalizar;
     private javax.swing.JButton botonArchivoCom;
     private javax.swing.JButton botonDescompresion;
