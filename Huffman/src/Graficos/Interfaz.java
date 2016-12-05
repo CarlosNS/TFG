@@ -20,7 +20,7 @@ import javax.swing.filechooser.FileFilter;
  * @author Carlos Naranjo Sánchez
  */
 public class Interfaz extends javax.swing.JFrame {
-
+    
     Funcionalidad.Principal frec;
     String ultimoDic;
     File ubicacionGuardarDicc;
@@ -35,7 +35,7 @@ public class Interfaz extends javax.swing.JFrame {
         frec = new Funcionalidad.Principal(textoConsola);
         labelTiempoCompre.setVisible(false);
         labelTiempoDescomp.setVisible(false);
-
+        
     }
 
     /**
@@ -48,6 +48,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void initComponents() {
 
         jFileChooser1 = new javax.swing.JFileChooser();
+        grupoDic = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -67,7 +68,10 @@ public class Interfaz extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         checkEstandar = new javax.swing.JCheckBox();
         botonGuardarDicc = new javax.swing.JButton();
-        CheckBoxGrupos = new javax.swing.JCheckBox();
+        jPanel4 = new javax.swing.JPanel();
+        rbNormal = new javax.swing.JRadioButton();
+        rbPartido = new javax.swing.JRadioButton();
+        rbRepartido = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         textoDicAcom = new javax.swing.JTextField();
         textoTextAcomp = new javax.swing.JTextField();
@@ -97,7 +101,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         jLabel2.setText("Cotas");
 
-        botonAnalizar.setText("Abrir");
+        botonAnalizar.setText("Examinar");
         botonAnalizar.setEnabled(false);
         botonAnalizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -175,53 +179,71 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        CheckBoxGrupos.setText("Diccionario en dos grupos");
-        CheckBoxGrupos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CheckBoxGruposActionPerformed(evt);
-            }
-        });
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo de diccionario"));
+
+        grupoDic.add(rbNormal);
+        rbNormal.setSelected(true);
+        rbNormal.setText("Normal");
+
+        grupoDic.add(rbPartido);
+        rbPartido.setText("Partido");
+
+        grupoDic.add(rbRepartido);
+        rbRepartido.setText("Repartido");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rbNormal)
+                .addGap(50, 50, 50)
+                .addComponent(rbPartido)
+                .addGap(36, 36, 36)
+                .addComponent(rbRepartido)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbNormal)
+                    .addComponent(rbPartido)
+                    .addComponent(rbRepartido))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(227, 227, 227))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(185, 185, 185)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botonAnalizar)
-                        .addGap(0, 47, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(etiquetaEstadoDicc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textoLongitudMedia))
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44)
+                                .addComponent(etiquetaEstadoDicc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(botonGuardarDicc)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botonDiccionario)))
-                .addContainerGap())
+                                .addComponent(jLabel1)
+                                .addGap(185, 185, 185)
+                                .addComponent(jButton2))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botonAnalizar)
+                            .addComponent(checkEstandar))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(10, 10, 10)
@@ -231,9 +253,19 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGap(249, 249, 249))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CheckBoxGrupos)
-                            .addComponent(checkEstandar))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(textoLongitudMedia))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(botonGuardarDicc)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(botonDiccionario))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,22 +274,26 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
-                    .addComponent(botonAnalizar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(checkEstandar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonAnalizar)
+                .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel2)
                     .addComponent(textoCotaInferior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textoCotaSuperior, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(checkEstandar)
-                .addGap(3, 3, 3)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(etiquetaEstadoDicc, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CheckBoxGrupos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(etiquetaEstadoDicc, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(botonDiccionario)
@@ -266,7 +302,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(textoLongitudMedia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Crear Diccionario", jPanel1);
@@ -306,7 +342,7 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        labelTiempoCompre.setText("jLabel11");
+        labelTiempoCompre.setText("TiempoCompresion");
 
         jLabel11.setText("Ruta y nombre del nuevo archivo");
 
@@ -322,7 +358,7 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -383,7 +419,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addComponent(labelErroresComprimir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Compresion", jPanel2);
@@ -436,14 +472,13 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(botonTextoADescom)
                             .addComponent(BotonDiccAdescom))
-                        .addContainerGap(169, Short.MAX_VALUE))
+                        .addContainerGap(119, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelErroresDescomprimir)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(botonDescompresion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(labelTiempoDescomp, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(labelErroresDescomprimir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonDescompresion)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelTiempoDescomp, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -462,10 +497,13 @@ public class Interfaz extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(labelErroresDescomprimir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonDescompresion)
-                    .addComponent(labelTiempoDescomp))
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(labelTiempoDescomp)
+                        .addContainerGap(305, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(botonDescompresion)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Descompresión", jPanel3);
@@ -486,34 +524,6 @@ public class Interfaz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonAnalizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAnalizarMouseClicked
-
-    }//GEN-LAST:event_botonAnalizarMouseClicked
-
-    private void botonAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnalizarActionPerformed
-        float entro = frec.lectura(textoAnalizar.getText(), checkEstandar.isSelected());
-        textoCotaInferior.setText(Float.toString(entro));
-        textoCotaSuperior.setText(Float.toString(entro + (float) frec.getfrecmax() + 0.082f));
-        textoLongitudMedia.setText(Integer.toString((int) (100 - (((entro + 0.5f) * 100) / 7))));
-        textoLongitudMedia.setText(CompreDescom.DameLongitud(frec.getDic()) + "");
-        botonGuardarDicc.setEnabled(true);
-    }//GEN-LAST:event_botonAnalizarActionPerformed
-
-    private void textoAnalizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textoAnalizarMouseClicked
-
-    }//GEN-LAST:event_textoAnalizarMouseClicked
-
-    private void botonDiccionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDiccionarioActionPerformed
-        try {
-            CompreDescom.escribeDicci(frec.getDic(), ubicacionGuardarDicc.getAbsolutePath());
-            etiquetaEstadoDicc.setText("Diccionario creado");
-
-        } catch (IOException ex) {
-            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-            etiquetaEstadoDicc.setText("Error al crear el diccionario");
-        }
-    }//GEN-LAST:event_botonDiccionarioActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Long Tiempo;
         Tiempo = System.currentTimeMillis();
@@ -524,17 +534,17 @@ public class Interfaz extends javax.swing.JFrame {
             labelTiempoCompre.setVisible(true);
             
             File viejo = new File(textoTextAcomp.getText());
-            File nuevo = new File(ubicacionNuevoComprimido.getAbsolutePath()+".chf");
+            File nuevo = new File(ubicacionNuevoComprimido.getAbsolutePath() + ".chf");
             double lviejo = new Double(viejo.length());
             double lnuevo = new Double(nuevo.length());
             
             Double porcentaje = 100 - (lnuevo / lviejo) * 100;
-            textoCompReal.setText(String.valueOf(porcentaje).substring(0, 5)+"%");
+            textoCompReal.setText(String.valueOf(porcentaje).substring(0, 5) + "%");
         } catch (IOException | ExcepcionNoExisteEnDicc ex) {
             labelErroresComprimir.setText(ex.getMessage());
             ubicacionNuevoComprimido.delete();
         }
-
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -555,17 +565,6 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonDescompresionActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JFileChooser elegir = new JFileChooser();
-        elegir.showOpenDialog(null);
-
-        if (elegir.getSelectedFile() != null) {
-            String archivo = elegir.getSelectedFile().getAbsolutePath();
-            textoAnalizar.setText(archivo);
-            botonAnalizar.setEnabled(true);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void botonArchivoComActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonArchivoComActionPerformed
         JFileChooser elegir = new JFileChooser();
         elegir.showOpenDialog(null);
@@ -583,14 +582,14 @@ public class Interfaz extends javax.swing.JFrame {
             public boolean accept(File file) {
                 return file.getName().toLowerCase().endsWith(".dhf") || file.isDirectory();
             }
-
+            
             @Override
             public String getDescription() {
                 return "Diccionario Huffman";
             }
         };
         elegir.setFileFilter(ff);
-
+        
         elegir.showOpenDialog(null);
         if (elegir.getSelectedFile() != null) {
             String archivo = elegir.getSelectedFile().getAbsolutePath();
@@ -605,7 +604,7 @@ public class Interfaz extends javax.swing.JFrame {
             public boolean accept(File file) {
                 return file.getName().toLowerCase().endsWith(".chf") || file.isDirectory();
             }
-
+            
             @Override
             public String getDescription() {
                 return "Comprimido Huffman";
@@ -628,7 +627,7 @@ public class Interfaz extends javax.swing.JFrame {
             public boolean accept(File file) {
                 return file.getName().toLowerCase().endsWith(".dhf") || file.isDirectory();
             }
-
+            
             @Override
             public String getDescription() {
                 return "Diccionario Huffman";
@@ -642,13 +641,13 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BotonDiccAdescomActionPerformed
 
-    private void textoCotaSuperiorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoCotaSuperiorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoCotaSuperiorActionPerformed
-
-    private void checkEstandarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkEstandarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkEstandarActionPerformed
+    private void botonRutaNuevoComprimidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRutaNuevoComprimidoActionPerformed
+        JFileChooser ruta = new JFileChooser();
+        ruta.showOpenDialog(null);
+        if (ruta.getSelectedFile() != null) {
+            this.ubicacionNuevoComprimido = ruta.getSelectedFile();
+        }
+    }//GEN-LAST:event_botonRutaNuevoComprimidoActionPerformed
 
     private void botonGuardarDiccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarDiccActionPerformed
         JFileChooser ruta = new JFileChooser();
@@ -659,17 +658,65 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonGuardarDiccActionPerformed
 
-    private void botonRutaNuevoComprimidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRutaNuevoComprimidoActionPerformed
-        JFileChooser ruta = new JFileChooser();
-        ruta.showOpenDialog(null);
-        if (ruta.getSelectedFile() != null) {
-            this.ubicacionNuevoComprimido = ruta.getSelectedFile();
-        }
-    }//GEN-LAST:event_botonRutaNuevoComprimidoActionPerformed
+    private void checkEstandarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkEstandarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkEstandarActionPerformed
 
-    private void CheckBoxGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxGruposActionPerformed
-        frec.setDoble();    
-    }//GEN-LAST:event_CheckBoxGruposActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JFileChooser elegir = new JFileChooser();
+        elegir.showOpenDialog(null);
+
+        if (elegir.getSelectedFile() != null) {
+            String archivo = elegir.getSelectedFile().getAbsolutePath();
+            textoAnalizar.setText(archivo);
+            botonAnalizar.setEnabled(true);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void textoCotaSuperiorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoCotaSuperiorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textoCotaSuperiorActionPerformed
+
+    private void botonDiccionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDiccionarioActionPerformed
+        if(rbNormal.isSelected()){
+            frec.setNormal();
+        }else if(rbPartido.isSelected()){
+            frec.setPartido();
+        }else if(rbRepartido.isSelected()){
+            frec.setRepartido();
+        }
+        
+        try {
+            frec.escritura();
+            CompreDescom.escribeDicci(frec.getDic(), ubicacionGuardarDicc.getAbsolutePath());
+            etiquetaEstadoDicc.setText("Diccionario creado");
+
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+            etiquetaEstadoDicc.setText("Error al crear el diccionario");
+        }
+    }//GEN-LAST:event_botonDiccionarioActionPerformed
+
+    private void textoAnalizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textoAnalizarMouseClicked
+
+    }//GEN-LAST:event_textoAnalizarMouseClicked
+
+    private void botonAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnalizarActionPerformed
+        if (textoAnalizar.getText() != null) {
+            checkEstandar.setEnabled(true);
+        }
+        float entro = frec.lectura(textoAnalizar.getText(), checkEstandar.isSelected());
+        checkEstandar.setEnabled(false);
+        textoCotaInferior.setText(Float.toString(entro));
+        textoCotaSuperior.setText(Float.toString(entro + (float) frec.getfrecmax() + 0.082f));
+        textoLongitudMedia.setText(Integer.toString((int) (100 - (((entro + 0.5f) * 100) / 7))));
+        textoLongitudMedia.setText(CompreDescom.DameLongitud(frec.getDic()) + "");
+        botonGuardarDicc.setEnabled(true);
+    }//GEN-LAST:event_botonAnalizarActionPerformed
+
+    private void botonAnalizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAnalizarMouseClicked
+
+    }//GEN-LAST:event_botonAnalizarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -706,7 +753,6 @@ public class Interfaz extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonDiccAdescom;
-    private javax.swing.JCheckBox CheckBoxGrupos;
     private javax.swing.JButton botonAnalizar;
     private javax.swing.JButton botonArchivoCom;
     private javax.swing.JButton botonDescompresion;
@@ -717,6 +763,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton botonTextoADescom;
     private javax.swing.JCheckBox checkEstandar;
     private javax.swing.JLabel etiquetaEstadoDicc;
+    private javax.swing.ButtonGroup grupoDic;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JFileChooser jFileChooser1;
@@ -733,6 +780,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -740,6 +788,9 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel labelErroresDescomprimir;
     private javax.swing.JLabel labelTiempoCompre;
     private javax.swing.JLabel labelTiempoDescomp;
+    private javax.swing.JRadioButton rbNormal;
+    private javax.swing.JRadioButton rbPartido;
+    private javax.swing.JRadioButton rbRepartido;
     private javax.swing.JTextPane textoAnalizar;
     private javax.swing.JTextField textoCompReal;
     private javax.swing.JTextArea textoConsola;

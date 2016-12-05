@@ -4,6 +4,7 @@
  */
 package Funcionalidad;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -32,22 +33,40 @@ public class TablaFrecuencias {
         procesada = false;
         cuenta = fin = 0;
     }
-    
-    public TablaFrecuencias subTabla(int inicio, int fin) throws IndexOutOfBoundsException{
-        if(procesada && inicio>=0 && fin<=this.fin){
+
+    public TablaFrecuencias subTabla(int inicio, int fin) throws IndexOutOfBoundsException {
+        if (procesada && inicio >= 0 && fin <= this.fin) {
             TablaFrecuencias dev = new TablaFrecuencias();
             for (int i = inicio; i < fin; i++) {
                 dev.insertar((char) lista.get(i).n);
             }
             return dev;
-        }else{
+        } else {
             throw new IndexOutOfBoundsException();
         }
     }
 
+    public ArrayList<TablaFrecuencias> Repartida() {
+        TablaFrecuencias uno, dos;
+        uno = new TablaFrecuencias();
+        dos = new TablaFrecuencias();
+        ArrayList<TablaFrecuencias> dev = new ArrayList<>();
+        dev.add(uno);
+        dev.add(dos);
+        
+        for (int i = 0; i < lista.size(); i++) {
+            if(i%2==0){
+                uno.insertar((char) lista.get(i).n);
+            }else{
+                dos.insertar((char) lista.get(i).n);
+            }
+        }
+        return dev;
+    }
+
     //10 es salto de linea, 13, retorno de carro
     public boolean insertar(char letra) {
-        
+
         if (!procesada) {
             int sitio = lista.indexOf(new Letra(letra, 0));
             if (sitio != -1) {
@@ -67,7 +86,8 @@ public class TablaFrecuencias {
      * Función para calcular la probabilidad de cada letra
      */
     public void procesar() {
-        if (!procesada) {lista.stream().forEach((lista1) -> {
+        if (!procesada) {
+            lista.stream().forEach((lista1) -> {
                 lista1.fr /= cuenta;
             });
             procesada = true;
@@ -75,7 +95,9 @@ public class TablaFrecuencias {
     }
 
     public Letra valor(int i) {
-        if (i <= fin) {return lista.get(i);}
+        if (i <= fin) {
+            return lista.get(i);
+        }
         System.err.println("Error en tablaFrecuencias");
         return null;
     }
@@ -95,7 +117,7 @@ public class TablaFrecuencias {
 
     /*
     Ordena de mayor a menor
-    */
+     */
     void ordenar() {
         Collections.sort(lista, (Letra arg0, Letra arg1) -> Double.compare(arg1.fr, arg0.fr));
     }

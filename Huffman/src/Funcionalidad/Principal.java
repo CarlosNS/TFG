@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import static java.lang.Math.log;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextArea;
@@ -22,21 +23,23 @@ import javax.swing.JTextArea;
 public class Principal {
 
     static JTextArea consola;
-    private ArbolHuffman dic, dicdoble;
+    private ArbolHuffman dic;
     private double frecmax;
-    private boolean doble = false;
+    private String tipo = "normal";
+    private TablaFrecuencias tf;
 
     public ArbolHuffman getDic() {
-        if (doble) {
-            return dicdoble;
-        } else {
-            return dic;
-        }
+        return dic;
     }
 
-    public boolean setDoble() {
-        doble = !doble;
-        return doble;
+    public void setPartido() {
+        tipo = "partido";
+    }
+    public void setRepartido() {
+        tipo = "repartido";
+    }
+    public void setNormal(){
+        tipo="normal";
     }
 
     /**
@@ -78,7 +81,7 @@ public class Principal {
     public float lectura(String ruta, boolean principio) {
         try {
 
-            TablaFrecuencias tf = new TablaFrecuencias();
+            tf = new TablaFrecuencias();
 
             if (principio) {
                 constructor(tf);
@@ -103,14 +106,8 @@ public class Principal {
             tf.procesar();
             frecmax = tf.getLista().get(0).fr;
 
-            if (doble) {
-                TablaFrecuencias primera = tf.subTabla(0, tf.getFin() / 2);
-                TablaFrecuencias segunda = tf.subTabla(tf.getFin()/ 2, tf.getFin());
+            
 
-                dicdoble = Huffman.CodigoHuffman.Doble(primera.getLista(), segunda.getLista());
-            } else {
-                dic = Huffman.CodigoHuffman.Huffman(tf.getLista());
-            }
             consola.setText(tf.toString());
             return entropia(tf);
         } catch (IOException ex) {
@@ -119,6 +116,26 @@ public class Principal {
         return 0;
     }
 
+    public void escritura(){
+        switch (tipo) {
+                case "normal":
+                    dic = Huffman.CodigoHuffman.Huffman(tf.getLista());
+
+                    break;
+                case "partido":
+                    TablaFrecuencias primera = tf.subTabla(0, tf.getFin() / 2);
+                    TablaFrecuencias segunda = tf.subTabla(tf.getFin() / 2, tf.getFin());
+
+                    dic = Huffman.CodigoHuffman.Doble(primera.getLista(), segunda.getLista());
+
+                    break;
+                case "repartido":
+                    ArrayList<TablaFrecuencias> dev = tf.Repartida();
+                     dic = Huffman.CodigoHuffman.Doble(dev.get(0).getLista(), dev.get(1).getLista());
+                    break;
+            }
+    }
+    
     private static float entropia(TablaFrecuencias tf) {
         float cuenta = 0;
         for (int i = 0; i < tf.getFin(); i++) {
