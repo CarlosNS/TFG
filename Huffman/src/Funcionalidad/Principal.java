@@ -102,12 +102,9 @@ public class Principal {
             tf.insertar((char) car);
 
             tf.ordenar();
-
             tf.procesar();
-            frecmax = tf.getLista().get(0).fr;
-
             
-
+            frecmax = tf.getLista().get(0).fr;   
             consola.setText(tf.toString());
             return entropia(tf);
         } catch (IOException ex) {
