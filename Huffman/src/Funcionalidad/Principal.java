@@ -35,11 +35,13 @@ public class Principal {
     public void setPartido() {
         tipo = "partido";
     }
+
     public void setRepartido() {
         tipo = "repartido";
     }
-    public void setNormal(){
-        tipo="normal";
+
+    public void setNormal() {
+        tipo = "normal";
     }
 
     /**
@@ -51,7 +53,9 @@ public class Principal {
     }
 
     public Principal(JTextArea jt) {
-        consola = jt;
+        if (jt != null) {
+            consola = jt;
+        }
     }
 
     /**
@@ -103,9 +107,11 @@ public class Principal {
 
             tf.ordenar();
             tf.procesar();
-            
-            frecmax = tf.getLista().get(0).fr;   
-            consola.setText(tf.toString());
+
+            frecmax = tf.getLista().get(0).fr;
+            if (consola != null) {
+                consola.setText(tf.toString());
+            }
             return entropia(tf);
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -113,26 +119,26 @@ public class Principal {
         return 0;
     }
 
-    public void escritura(){
+    public void escritura() {
         switch (tipo) {
-                case "normal":
-                    dic = Huffman.CodigoHuffman.Huffman(tf.getLista());
+            case "normal":
+                dic = Huffman.CodigoHuffman.Huffman(tf.getLista());
 
-                    break;
-                case "partido":
-                    TablaFrecuencias primera = tf.subTabla(0, tf.getFin() / 2);
-                    TablaFrecuencias segunda = tf.subTabla(tf.getFin() / 2, tf.getFin());
+                break;
+            case "partido":
+                TablaFrecuencias primera = tf.subTabla(0, tf.getFin() / 2);
+                TablaFrecuencias segunda = tf.subTabla(tf.getFin() / 2, tf.getFin());
 
-                    dic = Huffman.CodigoHuffman.Doble(primera.getLista(), segunda.getLista());
+                dic = Huffman.CodigoHuffman.Doble(primera.getLista(), segunda.getLista());
 
-                    break;
-                case "repartido":
-                    ArrayList<TablaFrecuencias> dev = tf.Repartida();
-                     dic = Huffman.CodigoHuffman.Doble(dev.get(0).getLista(), dev.get(1).getLista());
-                    break;
-            }
+                break;
+            case "repartido":
+                ArrayList<TablaFrecuencias> dev = tf.Repartida();
+                dic = Huffman.CodigoHuffman.Doble(dev.get(0).getLista(), dev.get(1).getLista());
+                break;
+        }
     }
-    
+
     private static float entropia(TablaFrecuencias tf) {
         float cuenta = 0;
         for (int i = 0; i < tf.getFin(); i++) {
