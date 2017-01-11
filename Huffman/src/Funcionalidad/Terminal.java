@@ -10,7 +10,6 @@ import Excepciones.ExcepcionNoExisteEnDicc;
 import Graficos.Interfaz;
 import Huffman.CompreDescom;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

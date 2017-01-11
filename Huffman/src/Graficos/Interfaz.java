@@ -690,6 +690,8 @@ public class Interfaz extends javax.swing.JFrame {
             frec.escritura();
             CompreDescom.escribeDicci(frec.getDic(), ubicacionGuardarDicc.getAbsolutePath());
             etiquetaEstadoDicc.setText("Diccionario creado");
+            textoLongitudMedia.setText(CompreDescom.DameLongitud(frec.getDic()) + "");
+
 
         } catch (IOException ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -709,8 +711,8 @@ public class Interfaz extends javax.swing.JFrame {
         checkEstandar.setEnabled(false);
         textoCotaInferior.setText(Float.toString(entro));
         textoCotaSuperior.setText(Float.toString(entro + (float) frec.getfrecmax() + 0.082f));
-        textoLongitudMedia.setText(Integer.toString((int) (100 - (((entro + 0.5f) * 100) / 7))));
-        textoLongitudMedia.setText(CompreDescom.DameLongitud(frec.getDic()) + "");
+        //textoLongitudMedia.setText(Integer.toString((int) (100 - (((entro + 0.5f) * 100) / 7))));
+        //textoLongitudMedia.setText(CompreDescom.DameLongitud(frec.getDic()) + "");
         botonGuardarDicc.setEnabled(true);
     }//GEN-LAST:event_botonAnalizarActionPerformed
 
@@ -744,10 +746,8 @@ public class Interfaz extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Interfaz().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Interfaz().setVisible(true);
         });
     }
 

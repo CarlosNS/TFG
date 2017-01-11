@@ -25,7 +25,7 @@ public class Principal {
     static JTextArea consola;
     private ArbolHuffman dic;
     private double frecmax;
-    private String tipo = "normal";
+    private static String tipo = "normal";
     private TablaFrecuencias tf;
 
     public ArbolHuffman getDic() {
@@ -141,10 +141,30 @@ public class Principal {
 
     private static float entropia(TablaFrecuencias tf) {
         float cuenta = 0;
+
+        /*
+        switch (tipo) {
+            case "normal":
+                for (int i = 0; i < tf.getFin(); i++) {
+                    cuenta += tf.valor(i).fr * (log(tf.valor(i).fr) / log(2));
+                    cuenta=-cuenta;
+                }
+                break;
+            case "partido":
+                cuenta= 2;
+                break;
+            case "repartido":
+                cuenta=3;
+                break;
+        }*/
+
+        
         for (int i = 0; i < tf.getFin(); i++) {
-            cuenta += tf.valor(i).fr * (log(tf.valor(i).fr) / log(2));
-        }
-        return -cuenta;
+                    cuenta += tf.valor(i).fr * (log(tf.valor(i).fr) / log(2));
+                }
+                            cuenta=-cuenta;
+
+        return cuenta;
     }
 
 }
