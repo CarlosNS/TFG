@@ -29,7 +29,9 @@ import java.io.OutputStreamWriter;
  */
 public class CompreDescom {
 
-    private static float Longitud = 0;
+    private static float Longitud;
+    private static float Varianza;
+    private static int nHojas;
 
     /**
      * Función para crear un archivo que contendrá el árbol usado como
@@ -192,9 +194,14 @@ public class CompreDescom {
      * @return la longitud media
      */
     public static float DameLongitud(ArbolHuffman dicc) {
-        Longitud = 0;
+        Longitud = Varianza = nHojas = 0;
         dameLongitud(dicc, new StringBuffer());
         return Longitud;
+    }
+    
+    public static float Varianza(){
+        Varianza = (Varianza/nHojas) - Longitud*Longitud;
+        return Varianza;
     }
 
     /**
@@ -207,8 +214,11 @@ public class CompreDescom {
         assert arbol != null;
         if (arbol instanceof HojaHuffman) {
             HojaHuffman leaf = (HojaHuffman) arbol;
+            nHojas++;
             Longitud += leaf.frecuencia * prefix.length();
-
+            //Prueba varianza
+            Varianza += prefix.length()*prefix.length();
+            
         } else if (arbol instanceof ArbolHuffman.NodoHuffman) {
             ArbolHuffman.NodoHuffman nodo = (ArbolHuffman.NodoHuffman) arbol;
 
