@@ -22,6 +22,7 @@ import trabajarBits.BitInputStream;
 import trabajarBits.BitOutputStream;
 import Excepciones.*;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 
 /**
  *
@@ -29,8 +30,9 @@ import java.io.OutputStreamWriter;
  */
 public class CompreDescom {
 
-    private static float Longitud;
-    private static float Varianza;
+    private static float LongitudMedia;
+    private static float desvTip;
+    private static ArrayList<Integer> longitudes;
     private static int nHojas;
 
     /**
@@ -194,14 +196,20 @@ public class CompreDescom {
      * @return la longitud media
      */
     public static float DameLongitud(ArbolHuffman dicc) {
-        Longitud = Varianza = nHojas = 0;
+        LongitudMedia = nHojas = 0;
+        longitudes = new ArrayList<>();
         dameLongitud(dicc, new StringBuffer());
-        return Longitud;
+        return LongitudMedia;
     }
     
-    public static float Varianza(){
-        Varianza = (Varianza/nHojas) - Longitud*Longitud;
-        return Varianza;
+    public static float DesviacionTipica(){
+        desvTip=0;
+        for (int i = 0; i < longitudes.size(); i++) {
+            //math.pow(base, exponente) para hacer base^exponente
+            desvTip+=Math.pow(longitudes.get(i)-LongitudMedia, 2);
+        }
+        desvTip = (float) Math.sqrt((desvTip)/nHojas);
+        return desvTip;
     }
 
     /**
@@ -215,9 +223,8 @@ public class CompreDescom {
         if (arbol instanceof HojaHuffman) {
             HojaHuffman leaf = (HojaHuffman) arbol;
             nHojas++;
-            Longitud += leaf.frecuencia * prefix.length();
-            //Prueba varianza
-            Varianza += prefix.length()*prefix.length();
+            LongitudMedia += leaf.frecuencia * prefix.length();
+            longitudes.add(prefix.length());
             
         } else if (arbol instanceof ArbolHuffman.NodoHuffman) {
             ArbolHuffman.NodoHuffman nodo = (ArbolHuffman.NodoHuffman) arbol;
