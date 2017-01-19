@@ -705,8 +705,9 @@ public class Interfaz extends javax.swing.JFrame {
             etiquetaEstadoDicc.setText("Diccionario creado");
             textoLongitudMedia.setText(CompreDescom.DameLongitud(frec.getDic()) + "");
             textoVarianza.setText(CompreDescom.DesviacionTipica()+"");
-
-
+            
+            VistaDiccionario vd = new VistaDiccionario("Vista de " + ubicacionGuardarDicc.getName(), frec.getDic().imprimirCodigos());
+            vd.setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
             etiquetaEstadoDicc.setText("Error al crear el diccionario");
@@ -722,7 +723,6 @@ public class Interfaz extends javax.swing.JFrame {
             checkEstandar.setEnabled(true);
         }
         float entro = frec.lectura(textoAnalizar.getText(), checkEstandar.isSelected());
-        checkEstandar.setEnabled(false);
         textoCotaInferior.setText(Float.toString(entro));
         textoCotaSuperior.setText(Float.toString(entro + (float) frec.getfrecmax() + 0.082f));
         //textoLongitudMedia.setText(Integer.toString((int) (100 - (((entro + 0.5f) * 100) / 7))));

@@ -6,6 +6,8 @@
 package Funcionalidad;
 
 import java.io.Serializable;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 /**
@@ -67,7 +69,10 @@ public class Letra implements Serializable {
      */
     @Override
     public String toString() {
-        return ("Codigo: " + this.n + "\tCaracter: \"" + caracter + "\"\tFrecuencia: " + fr);
+        //return ("Codigo: " + this.n + "\tCaracter: \"" + caracter + "\"\tFrecuencia: " + fr);
+        DecimalFormat df = new DecimalFormat("#.#####");
+        df.setRoundingMode(RoundingMode.HALF_EVEN);
+        return ("Codigo: " + this.n + "\tCaracter: \"" + caracter + "\"\tFrecuencia: " + df.format(fr));
     }
 
     @Override

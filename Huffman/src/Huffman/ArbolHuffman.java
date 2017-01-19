@@ -45,7 +45,7 @@ public abstract class ArbolHuffman implements Comparable<ArbolHuffman>, Serializ
         if (arbol instanceof HojaHuffman) {
             HojaHuffman leaf = (HojaHuffman) arbol;
 
-            res.append(leaf.letras + "\t" + prefix.toString() + "\n");
+            res.append(leaf.letras).append("\t").append(prefix.toString()).append("\n");
 
         } else if (arbol instanceof NodoHuffman) {
             NodoHuffman node = (NodoHuffman) arbol;
